@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/league_managesystem?useUnicode=true&characterEncoding=utf8
+    username: root
+    password: yzheng520
+    driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  thymeleaf:
+    cache: false
+  resources:
+    static-locations: classpath:/static/

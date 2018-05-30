@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>所有联赛相册信息</title>
+    <link rel="stylesheet" href="/plugins/layui/css/layui.css" media="all">
+    <!--<link rel="stylesheet" type="text/css" href="/plugins/bootstrap/css/bootstrap.css">-->
+    <!--<link rel="stylesheet" href="//cdn.bootcss.com/zui/1.8.1/css/zui.min.css">-->
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin layui-bg-blue">
+    <!-- 头部区域 -->
+    <div th:replace="index::topbar"></div>
+
+    <!-- 左侧导航区域 -->
+    <div th:replace="index::sidebar"></div>
+
+    <!-- 底部固定区域 -->
+    <div th:replace="index::bottombar"></div>
+
+    <!-- 内容主体区域 -->
+    <div class="layui-body">
+        <table class="layui-table">
+            <colgroup>
+                <col width="5%">
+                <col width="20%">
+                <col width="10%">
+                <col width="15%">
+                <col width="15%">
+                <col width="20%">
+                <col width="15%">
+            </colgroup>
+            <thead>
+            <tr>
+                <td>ID</td>
+                <td>联赛名称</td>
+                <td>联赛简称</td>
+                <td>开始日期</td>
+                <td>结束日期</td>
+                <td>主办方</td>
+                <td></td>
+            </tr>
+            </thead>
+            <!--以下使用thymeleaf模板从数据库中遍历获取数据-->
+            <tbody>
+            <tr th:if="${leagueModel.leagueList.size()} eq 0">
+                <td copspan="2">没有联赛信息!</td>
+            </tr>
+            <tr th:each="league:${leagueModel.leagueList}">
+                <td th:text="${league.league_id}">null</td>
+                <td th:text="${league.leagueName}">null</td>
+                <td th:text="${league.shorterName}">null</td>
+                <td th:text="${league.startDate}">null</td>
+                <td th:text="${league.endDate}">null</td>
+                <td th:text="${league.sponsor}">null</td>
+                <td>
+                    <a th:href="@{/showPhoto(league_id=${league.league_id})}" class="layui-btn layui-btn-sm layui-btn-primary">查看照片</a>
+                    <a th:href="@{/addPhoto(league_id=${league.league_id})}" class="layui-btn layui-btn-sm layui-btn-normal">上传照片</a>
+                    <!--<a class="layui-btn layui-btn-sm layui-btn-normal">创建相册</a>-->
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- 修改密码弹窗 -->
+<script type="text/html" id="pswModel1">
+    <div id="pswModel" th:replace="index::changePsw">
+    </div>
+</script>
+
+</body>
+
+<script src="/plugins/layui/layui.js"></script>
+<script type="text/javascript" src="/js/jquery.js"></script>
+
+<script>
+    layui.use('form', function(){
+        var form = layui.form;
+
+        //各种基于事件的操作，下面会有进一步介绍
+    });
+
+    //点击事件
+    layui.use('element', function(){
+        var element = layui.element;
+
+    });
+
+    //显示个人信息
+    function info() {
+        layui.use(['layer'], function(){
+            var layer = layui.layer;
+            layer.open({
+                type:1,
+                title:'个人信息',
+                area:'350px',
+                offset:'120px',
+                content:'<ul style="padding:25px 35px 8px 35px;">' +
+                '<li>用户名：[[${session.loginUser}]]</li>'+
+                '<li>联系方式：[[${session.tel}]]</li>'+
+                '</ul>',
+                btn:['确定'],
+                btnAlign:'center'
+            });
+        });
+    }
+
+    //修改密码
+    function changePassword() {
+        layui.use(['layer'],function () {
+            var layer=layui.layer;
+            layer.open({
+                type: 1,
+                title: "修改密码",
+                area: '400px',
+                offset: '120px',
+                content: $("#pswModel1").html()
+            });
+        })
+    }
+</script>
+</html>

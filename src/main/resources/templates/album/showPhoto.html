@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>查看照片</title>
+    <link rel="stylesheet" href="/plugins/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="css/album_photo.css">
+    <!--<link rel="stylesheet" href="/plugins/AmazeUI/css/amazeui.css">-->
+    <!--<link rel="stylesheet" href="/plugins/zui/css/zui.css">-->
+    <!--<link rel="stylesheet" href="/plugins/zui/lib/uploader/zui.uploader.min.css">-->
+    <!--<link rel="stylesheet" type="text/css" href="/plugins/bootstrap/css/bootstrap.css">-->
+    <!--<link rel="stylesheet" href="//cdn.bootcss.com/zui/1.8.1/css/zui.min.css">-->
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin layui-bg-blue">
+    <!-- 头部区域 -->
+    <div th:replace="index::topbar"></div>
+
+    <!-- 左侧导航区域 -->
+    <div th:replace="index::sidebar"></div>
+
+    <!-- 底部固定区域 -->
+    <div th:replace="index::bottombar"></div>
+
+    <!-- 内容主体区域 -->
+    <div class="layui-body">
+        <!--<p>图片：</p>-->
+        <!--<p th:text="${league.league_id}">测试</p>-->
+        <!--<p th:text="${photo.fileName}">文件名</p>-->
+        <!--<img th:src="@{/upload/images/logo.png}">-->
+        <!--<img th:src="@{/upload/images/}+${photo.leagueID}+@{/94.jpeg}">-->
+        <!--<img th:src="@{/upload/images/}+${league.league_id}+@{/}+${photo.fileName}">-->
+
+        <!--<div th:each="photo:${photoModel.photoList}">-->
+            <!--<p>联赛ID</p>
+            <p th:text="${league.league_id}">测试1</p>
+            <p>所属联赛ID</p>
+            <p th:text="${photo.leagueID}">测试2</p>
+            <p>文件名</p>
+            <p th:text="${photo.fileName}">测试3</p>
+            <p>静态资源路径</p>
+            <p th:text="${photo.staticPath}">测试4</p>-->
+            <!--<img style="width: 250px;height: 200px" th:src="@{${photo.staticPath}}">-->
+            <!--@{/upload/images/}+${photo.leagueID}+@{/}+${photo.fileName}"-->
+
+
+            <!--ZUI-->
+            <!--<img th:src="@{${photo.staticPath}}" width="200px" height="200px" class="img-thumbnail">-->
+
+
+        <div class="album-topic">
+            <p th:text="${league.leagueName}+的相册">联赛名称</p>
+        </div>
+
+        <ul class="photo-list">
+            <div th:each="photo:${photoModel.photoList}">
+                <li style="float: left">
+                    <div class="img-block">
+                        <!--<img id="test" th:src="@{${photo.staticPath}}" class="img-style">-->
+                        <a th:href="@{${photo.staticPath}}" id="demo"><img id="test" th:src="@{${photo.staticPath}}" class="img-style"></a>
+                    </div>
+                    <h5 th:text="${photo.uploadDate}">上传日期</h5>
+                </li>
+            </div>
+        </ul>
+        <!--</div>-->
+
+        <!--分页-->
+        <!--<div id="page"></div>-->
+    </div>
+</div>
+
+<!-- 修改密码弹窗 -->
+<script type="text/html" id="pswModel1">
+    <div id="pswModel" th:replace="index::changePsw">
+    </div>
+</script>
+
+</body>
+
+<!--<script src="/plugins/AmazeUI/js/amazeui.js"></script>-->
+<!--<script src="/plugins/zui/js/zui.js"></script>-->
+<script src="/plugins/layui/layui.js"></script>
+<script type="text/javascript" src="/js/jquery.js"></script>
+
+<script th:inline="javascript">
+    /*var staticPath=[[${session.staticPath}]];*/
+    /*alert(staticPath);*/
+    /*var staticPath=$('#test')[0].src;
+    $("#demo").attr("href",$('#test')[0].src);*/
+</script>
+
+<script>
+    /*alert($('#test')[0].src);*/
+    /*$("#demo").attr("href",$('#test')[0].src);*/
+
+    /*$('a.light-toggle').lightbox({
+        image: $('#test')[0].src,
+        caption: '图片说明'
+    });*/
+
+    //表单事件
+    layui.use('form', function(){
+        var form = layui.form;
+
+        //各种基于事件的操作，下面会有进一步介绍
+    });
+
+    //点击事件
+    layui.use('element', function(){
+        var element = layui.element;
+
+    });
+
+    //分页事件
+    layui.use(['laypage','layer'],function () {
+        var laypage=layui.laypage,
+            layer=layui.layer;
+
+        //总页数低于页码总数
+        laypage.render({
+            elem: 'page'
+            ,count: 18      //数据总数
+            ,jump: function (obj,first) {
+                if(!first){
+                    layer.msg('第'+obj.curr+'页');
+                }
+            }
+        });
+    });
+
+
+    //显示个人信息
+    function info() {
+        layui.use(['layer'], function(){
+            var layer = layui.layer;
+            layer.open({
+                type:1,
+                title:'个人信息',
+                area:'350px',
+                offset:'120px',
+                content:'<ul style="padding:25px 35px 8px 35px;">' +
+                '<li>用户名：[[${session.loginUser}]]</li>'+
+                '<li>联系方式：[[${session.tel}]]</li>'+
+                '</ul>',
+                btn:['确定'],
+                btnAlign:'center'
+            });
+        });
+    }
+
+    //修改密码
+    function changePassword() {
+        layui.use(['layer'],function () {
+            var layer=layui.layer;
+            layer.open({
+                type: 1,
+                title: "修改密码",
+                area: '400px',
+                offset: '120px',
+                content: $("#pswModel1").html()
+            });
+        })
+    }
+</script>
+</html>

@@ -1,0 +1,203 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>添加比赛信息</title>
+    <link rel="stylesheet" href="/plugins/layui/css/layui.css" media="all">
+    <!--<link rel="stylesheet" href="//cdn.bootcss.com/zui/1.8.1/css/zui.min.css">-->
+    <!-- ZUI Javascript 依赖 jQuery -->
+    <!--<script src="//cdn.bootcss.com/zui/1.8.1/lib/jquery/jquery.js"></script>-->
+    <!-- ZUI 标准版压缩后的 JavaScript 文件 -->
+    <!--<script src="//cdn.bootcss.com/zui/1.8.1/js/zui.min.js"></script>-->
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin layui-bg-blue">
+    <!-- 头部区域 -->
+    <div th:replace="index::topbar"></div>
+
+    <!-- 左侧导航区域 -->
+    <div th:replace="index::sidebar"></div>
+
+    <!-- 底部固定区域 -->
+    <div th:replace="index::bottombar"></div>
+
+    <!-- 内容主体区域 -->
+    <div class="layui-body">
+        <form class="layui-form">
+            <br>
+            <div class="layui-form-item">
+                <label class="layui-form-label">*所属于的联赛</label>
+                <div class="layui-input-inline">
+                    <select>
+                        <option value=""></option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">*比赛时间</label>
+                <div class="layui-inline">
+                    <input type="text" class="layui-input" id="matchTime" placeholder="请选择比赛时间">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">*比赛轮次</label>
+                <div class="layui-input-inline">
+                    <select name="position" lay-verify="required">
+                        <option value="">请选择比赛轮次</option>
+                        <option value="0">第1轮</option>
+                        <option value="1">第2轮</option>
+                        <option value="2">第3轮</option>
+                        <option value="3">第4轮</option>
+                        <option value="4">第5轮</option>
+                        <option value="5">第6轮</option>
+                        <option value="6">第7轮</option>
+                        <option value="7">第8轮</option>
+                        <option value="8">第9轮</option>
+                        <option value="9">第10轮</option>
+                        <option value="10">第11轮</option>
+                        <option value="11">第12轮</option>
+                        <option value="12">第13轮</option>
+                        <option value="13">第14轮</option>
+                        <option value="14">第15轮</option>
+                        <option value="15">第16轮</option>
+                        <option value="16">第17轮</option>
+                        <option value="17">第18轮</option>
+                        <option value="18">第19轮</option>
+                        <option value="19">第20轮</option>
+                        <option value="20">第21轮</option>
+                        <option value="21">第22轮</option>
+                        <option value="22">第23轮</option>
+                        <option value="23">第24轮</option>
+                        <option value="24">第25轮</option>
+                        <option value="25">第26轮</option>
+                        <option value="26">第27轮</option>
+                        <option value="27">第28轮</option>
+                        <option value="28">第29轮</option>
+                        <option value="29">第30轮</option>
+                        <!--<option value="30">第31轮</option>
+                        <option value="31">第32轮</option>
+                        <option value="32">第33轮</option>
+                        <option value="33">第34轮</option>
+                        <option value="34">第35轮</option>
+                        <option value="35">第36轮</option>
+                        <option value="36">第37轮</option>
+                        <option value="37">第38轮</option>-->
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">*主队</label>
+                <div class="layui-input-inline">
+                    <select>
+                        <option value=""></option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">*客队</label>
+                <div class="layui-input-inline">
+                    <select>
+                        <option value=""></option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">裁判</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="" placeholder="请输入裁判姓名" class="layui-input" autocomplete="off">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn layui-btn-normal" lay-submit lay-filter="*">完成</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+<!-- 修改密码弹窗 -->
+<script type="text/html" id="pswModel1">
+    <div id="pswModel" th:replace="index::changePsw">
+    </div>
+</script>
+
+</body>
+
+<script src="/plugins/layui/layui.js"></script>
+<script type="text/javascript" src="/js/jquery.js"></script>
+
+<script>
+    layui.use('form', function(){
+        var form = layui.form;
+
+        //各种基于事件的操作，下面会有进一步介绍
+    });
+
+    layui.use('laydate', function(){
+        var matchTime = layui.laydate;
+        //执行一个laydate实例
+        matchTime.render({
+            elem:'#matchTime'
+            ,theme:'#1E9FFF'
+        });
+    });
+</script>
+<script>
+
+    layui.use('element', function(){
+        var element = layui.element;
+
+        //一些事件监听
+        element.on('tab(demo)', function(data){
+            console.log(data);
+        });
+    });
+
+    //侧边导航栏展开并选中添加比赛选项
+    $("#matchManage").addClass("layui-nav-itemed");
+    $("#addMatchInformation").addClass("layui-this");
+
+    //显示个人信息
+    function info() {
+        layui.use(['layer'], function(){
+            var layer = layui.layer;
+            layer.open({
+                type:1,
+                title:'个人信息',
+                area:'350px',
+                offset:'120px',
+                content:'<ul style="padding:25px 35px 8px 35px;">' +
+                '<li>用户名：[[${session.loginUser}]]</li>'+
+                '<li>手机号：13657936306</li>'+
+                '</ul>',
+                btn:['确定'],
+                btnAlign:'center'
+            });
+        });
+    }
+
+    //修改密码
+    function changePassword() {
+        layui.use(['layer'],function () {
+            var layer=layui.layer;
+            layer.open({
+                type: 1,
+                title: "修改密码",
+                area: '400px',
+                offset: '120px',
+                content: $("#pswModel1").html()
+            });
+        })
+    }
+
+</script>
+
+</html>
+
+
+
+
+

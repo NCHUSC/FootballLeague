@@ -1,0 +1,211 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>查询球员信息</title>
+    <link rel="stylesheet" href="/plugins/layui/css/layui.css" media="all">
+    <!--<link rel="stylesheet" type="text/css" href="/css/city-picker.css">-->
+    <!--<link rel="stylesheet" type="text/css" href="/plugins/bootstrap/css/bootstrap.css">-->
+    <!--<link rel="stylesheet" href="//cdn.bootcss.com/zui/1.8.1/css/zui.min.css">-->
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin layui-bg-blue">
+    <!-- 头部区域 -->
+    <div th:replace="index::topbar"></div>
+
+    <!-- 左侧导航区域 -->
+    <div th:replace="index::sidebar"></div>
+
+    <!-- 底部固定区域 -->
+    <div th:replace="index::bottombar"></div>
+
+    <!-- 内容主体区域 -->
+    <div class="layui-body">
+        <div class="layui-tab layui-tab-brief" lay-filter="condition">
+            <label class="layui-form-label" style="font-size: large">查询条件</label>
+            <ul class="layui-tab-title">
+                <li>根据id查询</li>
+                <li class="layui-this">根据姓名查询</li>
+                <li>根据球队查询</li>
+                <li>根据场上位置查询</li>
+                <li>根据号码查询</li>
+                <li>根据年龄查询</li>
+                <li>根据身高查询</li>
+                <li>根据体重查询</li>
+            </ul>
+            <div class="layui-tab-content">
+                <!-- 根据id查询 -->
+                <div class="layui-tab-item">
+                    <div class="layui-form-item" style="margin: 100px auto;width: 800px">
+                        <div class="layui-input-block" style="width: 35%;display: inline-block">
+                            <input type="text" name="title" required  lay-verify="required" placeholder="请输入球员id" autocomplete="off" class="layui-input">
+                        </div>
+                        <button style="display: inline-block" class="layui-btn layui-btn-normal">搜索</button>
+                    </div>
+                </div>
+                <!-- 根据球员姓名查询 -->
+                <div class="layui-tab-item layui-show">
+                    <div class="layui-form-item" style="margin: 100px auto;width: 800px">
+                        <div class="layui-input-block" style="width: 35%;display: inline-block">
+                            <input type="text" name="title" required  lay-verify="required" placeholder="请输入球员姓名" autocomplete="off" class="layui-input">
+                        </div>
+                        <a href="#" th:href="@{showPlayer}"><button style="display: inline-block" class="layui-btn layui-btn-normal">搜索</button></a>
+                    </div>
+                </div>
+                <!-- 根据所属球队查询 -->
+                <div class="layui-tab-item">
+                    <div class="layui-form">
+                        <div class="layui-form-item" style="margin: 100px auto;width: 800px">
+                            <div class="layui-input-block" style="width: 35%;display: inline-block">
+                                <select name="league" lay-verify="required">
+                                    <option value="">请选择所属球队</option>
+                                </select>
+                            </div>
+                            <button style="display: inline-block" class="layui-btn layui-btn-normal">搜索</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- 根据场上位置查询 -->
+                <div class="layui-tab-item">
+                    <div class="layui-form">
+                        <div class="layui-form-item" style="margin: 100px auto;width: 800px">
+                            <div class="layui-input-block" style="width: 35%;display: inline-block">
+                                <select name="position" lay-verify="required">
+                                    <option value="">请选择场上位置</option>
+                                    <option value="0">前锋</option>
+                                    <option value="1">中场</option>
+                                    <option value="2">后卫</option>
+                                    <option value="3">守门员</option>
+                                </select>
+                            </div>
+                            <button style="display: inline-block" class="layui-btn layui-btn-normal">搜索</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- 根据球衣号码查询 -->
+                <div class="layui-tab-item">
+                    <div class="layui-form-item" style="margin: 100px auto;width: 800px">
+                        <div class="layui-input-block" style="width: 35%;display: inline-block">
+                            <input type="text" name="title" required  lay-verify="required" placeholder="请输入球衣号码(0-99)" autocomplete="off" class="layui-input">
+                        </div>
+                        <button style="display: inline-block" class="layui-btn layui-btn-normal">搜索</button>
+                    </div>
+                </div>
+                <!-- 根据球员年龄查询 -->
+                <div class="layui-tab-item">
+                    <div class="layui-form-item" style="margin: 100px auto;width: 800px">
+                        <div class="layui-inline" style="margin-right: 10px">
+                            <label class="layui-form-label">年龄范围</label>
+                            <div class="layui-input-inline" style="width: 120px;">
+                                <input type="text" name="price_min" placeholder="岁" autocomplete="off" class="layui-input">
+                            </div>
+                            <div class="layui-form-mid">-</div>
+                            <div class="layui-input-inline" style="width: 120px;">
+                                <input type="text" name="price_max" placeholder="岁" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <button class="layui-btn layui-btn-normal">搜索</button>
+                    </div>
+                </div>
+                <!-- 根据球员身高查询 -->
+                <div class="layui-tab-item">
+                    <div class="layui-form-item" style="margin: 100px auto;width: 800px">
+                        <div class="layui-inline" style="margin-right: 10px">
+                            <label class="layui-form-label">身高范围</label>
+                            <div class="layui-input-inline" style="width: 120px;">
+                                <input type="text" name="price_min" placeholder="cm" autocomplete="off" class="layui-input">
+                            </div>
+                            <div class="layui-form-mid">-</div>
+                            <div class="layui-input-inline" style="width: 120px;">
+                                <input type="text" name="price_max" placeholder="cm" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <button class="layui-btn layui-btn-normal">搜索</button>
+                    </div>
+                </div>
+                <!-- 根据球员体重查询 -->
+                <div class="layui-tab-item">
+                    <div class="layui-form-item" style="margin: 100px auto;width: 800px">
+                        <div class="layui-inline" style="margin-right: 10px">
+                            <label class="layui-form-label">体重范围</label>
+                            <div class="layui-input-inline" style="width: 120px;">
+                                <input type="text" name="price_min" placeholder="kg" autocomplete="off" class="layui-input">
+                            </div>
+                            <div class="layui-form-mid">-</div>
+                            <div class="layui-input-inline" style="width: 120px;">
+                                <input type="text" name="price_max" placeholder="kg" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <button class="layui-btn layui-btn-normal">搜索</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 修改密码弹窗 -->
+<script type="text/html" id="pswModel1">
+    <div id="pswModel" th:replace="index::changePsw">
+    </div>
+</script>
+
+</body>
+
+<script src="/plugins/layui/layui.js"></script>
+<script type="text/javascript" src="/js/jquery.js"></script>
+
+<script>
+    layui.use('form', function(){
+        var form = layui.form;
+
+        //各种基于事件的操作，下面会有进一步介绍
+    });
+
+    layui.use('element', function(){
+        var element = layui.element;
+
+        //一些事件监听
+        element.on('tab(condition)', function(data){
+            console.log(data);
+        });
+    });
+
+    //侧边导航栏展开并选中查询球员选项
+    $("#playerManage").addClass("layui-nav-itemed");
+    $("#queryPlayer").addClass("layui-this");
+
+    //显示个人信息
+    function info() {
+        layui.use(['layer'], function(){
+            var layer = layui.layer;
+            layer.open({
+                type:1,
+                title:'个人信息',
+                area:'350px',
+                offset:'120px',
+                content:'<ul style="padding:25px 35px 8px 35px;">' +
+                '<li>用户名：[[${session.loginUser}]]</li>'+
+                '<li>手机号：13657936306</li>'+
+                '</ul>',
+                btn:['确定'],
+                btnAlign:'center'
+            });
+        });
+    }
+
+    //修改密码
+    function changePassword() {
+        layui.use(['layer'],function () {
+            var layer=layui.layer;
+            layer.open({
+                type: 1,
+                title: "修改密码",
+                area: '400px',
+                offset: '120px',
+                content: $("#pswModel1").html()
+            });
+        })
+    }
+</script>
+</html>

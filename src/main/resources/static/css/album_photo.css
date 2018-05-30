@@ -1,0 +1,245 @@
+/*鐩稿唽淇℃伅*/
+.back-album {
+    padding: 10px;
+    color: #787878;
+}
+
+.back-btn {
+    cursor: pointer;
+}
+
+.album-detail {
+    height: 80px;
+    padding: 10px 10px 0;
+}
+
+.album-cover {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    margin-right: 30px;
+    overflow: hidden;
+}
+
+.album-info {
+    display: inline-block;
+    vertical-align: top;
+    height: 40px;
+    line-height: 40px;
+    font-size: 0;
+}
+
+.album-title {
+    font-size: 19px;
+    margin-right: 20px;
+}
+
+#album_name {
+    width: 130px;
+    height: 24px;
+    margin-right: 10px;
+    padding: 0 4px;
+    font-size: 12px;
+}
+
+.edit-btn {
+    display: inline-block;
+    height: 20px;
+    line-height: 20px;
+    margin-right: 10px;
+    padding: 2px 4px;
+    border-radius: 3px;
+    background: #ff0000;
+    font-size: 12px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.other-info {
+    font-size: 12px;
+}
+
+/*鐩稿唽鍒�*/
+#upload_photo {
+    display: none;
+}
+
+.photo-list {
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 0;
+}
+
+.photo-list li {
+    position: relative;
+    vertical-align: top;
+    display: inline-block;
+    width: 140px;
+    height: 178px;
+    margin: 0 33px 20px 0;
+}
+
+.photo-list li:nth-child(7n+0) {
+    margin-right: 0;
+}
+
+.delete-album {
+    display: none;
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #787878 url('../../img/photo_close.png') no-repeat center center;
+    background-size: 60%;
+}
+
+.photo-list li:hover .delete-album {
+    display: block;
+}
+
+.photo-list li.add-img {
+    background: url('../../img/add_photo.png') no-repeat center center #eee;
+    cursor: pointer;
+}
+
+.photo-list li.add-img h4 {
+    line-height: 240px;
+    font-size: 15px;
+    color: #a3a3a3;
+    text-align: center;
+}
+
+.img-block {
+    width: 140px;
+    height: 140px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.photo-list li h5 {
+    width: 140px;
+    height: 38px;
+    line-height: 38px;
+    margin: 0;
+    padding: 0;
+    background: #f7f7f7;
+    font-size: 12px;
+    color: #0c0c0c;
+    text-align: center;
+}
+
+/*灞曠ず绐楀彛*/
+#show_win {
+    display: none;
+    position: fixed;
+    z-index: 10;
+}
+
+.turn-left, .turn-right {
+    float: left;
+    width: 46px;
+    height: 500px;
+    cursor: pointer;
+}
+
+.turn-left {
+    background: url('../../img/album_left.png') no-repeat center center;
+}
+
+.turn-right {
+    background: url('../../img/album_right.png') no-repeat center center;
+}
+
+.img-content {
+    float: left;
+    width: 500px;
+    height: 500px;
+    margin: 0 40px;
+    background: black;
+}
+
+.img-header {
+    width: 460px;
+    height: 22px;
+    line-height: 22px;
+    padding: 20px;
+}
+
+.img-header span {
+    font-size: 15px;
+    color: #fefefe;
+}
+
+.img-title {
+    float: left;
+    margin: 0 20px;
+}
+
+.img-page {
+    float: left;
+}
+
+.show-close-btn {
+    float: right;
+    width: 20px;
+    height: 20px;
+    background: url('../../img/photo_close.png') no-repeat center center;
+    cursor: pointer;
+}
+
+.set-btn {
+    float: right;
+    cursor: pointer;
+    margin-right: 35px;
+}
+
+.show-img {
+    width: 500px;
+    height: 388px;
+    overflow: hidden;
+}
+
+#cur_img {
+    float: left;
+}
+
+.img-footer {
+    height: 50px;
+    padding: 0 20px;
+}
+
+.img-footer span {
+    float: right;
+    height: 50px;
+    line-height: 50px;
+    font-size: 16px;
+    color: #fefefe;
+    cursor: pointer;
+}
+.img-style{
+    display: inline-block;
+    max-width: 100%;
+    height: auto;
+    padding: 4px;
+    line-height: 1.53846154;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    -webkit-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+.album-topic{
+    margin:0 auto;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    border: none;
+    font: normal 30px/1 "΢���ź� Light", Helvetica, sans-serif;
+    color: #0096ff;
+    text-align: center;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+}

@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="/plugins/layui/css/layui.css" media="all">
+    <!--<link rel="stylesheet" type="text/css" href="/plugins/css/city-picker.css">-->
+    <title>查看赛事详情</title>
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin layui-bg-blue">
+    <!-- 头部区域 -->
+    <div th:replace="index::topbar"></div>
+
+    <!-- 左侧导航区域 -->
+    <div th:replace="index::sidebar"></div>
+
+    <!-- 底部固定区域 -->
+    <div th:replace="index::bottombar"></div>
+
+    <!-- 内容主体区域 -->
+    <div class="layui-body">
+        <form class="layui-form">
+            <br>
+            <div style="font-size: 18px;" class="layui-form-item">
+                <label class="layui-form-label">赛事全称:</label>
+                <label class="layui-form-label-col" th:text="${league.leagueName}">1</label>
+            </div>
+            <div style="font-size: 18px;" class="layui-form-item">
+                <label class="layui-form-label">赛事简称:</label>
+                <label class="layui-form-label-col" th:text="${league.shorterName}">1</label>
+            </div>
+            <div style="font-size: 18px;" class="layui-form-item">
+                <label class="layui-form-label">开始日期:</label>
+                <label class="layui-form-label-col" th:text="${league.startDate}">1</label>
+            </div>
+            <div style="font-size: 18px;" class="layui-form-item">
+                <label class="layui-form-label">结束日期:</label>
+                <label class="layui-form-label-col" th:text="${league.endDate}">1</label>
+            </div>
+            <div style="font-size: 18px;" class="layui-form-item">
+                <label class="layui-form-label">主办方:</label>
+                <label class="layui-form-label-col" th:text="${league.sponsor}">1</label>
+            </div>
+            <div style="font-size: 18px;" class="layui-form-item">
+                <label class="layui-form-label">赛制章程:</label>
+                <label class="layui-form-label-col" th:text="${league.constitution}">1</label>
+            </div>
+            <div style="font-size: 18px;" class="layui-form-item">
+                <label class="layui-form-label">赛制性质:</label>
+                <label class="layui-form-label-col" th:text="${league.level}">1</label>
+            </div>
+            <div style="font-size: 18px;" class="layui-form-item">
+                <label class="layui-form-label">几人制联赛:</label>
+                <label class="layui-form-label-col" th:text="${league.number}">1</label>
+            </div>
+            <div style="font-size: 18px;" class="layui-form-item">
+                <label class="layui-form-label">半场时间:</label>
+                <label class="layui-form-label-col" th:text="${league.halfTime}">1</label>
+            </div>
+            <div style="font-size: 18px;" class="layui-form-item">
+                <label class="layui-form-label">中场休息时间:</label>
+                <label class="layui-form-label-col" th:text="${league.halfRelaxTime}">1</label>
+            </div>
+            <div style="font-size: 18px;" class="layui-form-item">
+                <label class="layui-form-label">弃权默认比分:</label>
+                <label class="layui-form-label-col" th:text="${league.abstentionScore}">1</label>
+            </div>
+            <div style="font-size: medium" class="layui-form-item">
+                <div class="layui-input-block">
+                    <a th:href="@{/leagues}" class="layui-btn layui-btn-normal" lay-filter="*">完成</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<label>赛事全程</label>
+<span th:text="${league.leagueName}">1</span>
+
+<!-- 修改密码弹窗 -->
+<script type="text/html" id="pswModel1">
+    <div id="pswModel" th:replace="index::changePsw">
+    </div>
+</script>
+
+</body>
+
+<script src="/plugins/layui/layui.js"></script>
+<script type="text/javascript" src="/js/jquery.js"></script>
+
+<script>
+    layui.use('form', function () {
+        var form = layui.form;
+
+        //各种基于事件的操作，下面会有进一步介绍
+    });
+
+    layui.use('element', function () {
+        var element = layui.element;
+
+        //一些事件监听
+        element.on('tab(demo)', function (data) {
+            console.log(data);
+        });
+    });
+
+    //显示个人信息
+    function info() {
+        layui.use(['layer'], function () {
+            var layer = layui.layer;
+            layer.open({
+                type: 1,
+                title: '个人信息',
+                area: '350px',
+                offset: '120px',
+                content: '<ul style="padding:25px 35px 8px 35px;">' +
+                '<li>用户名：[[${session.loginUser}]]</li>' +
+                '<li>手机号：13657936306</li>' +
+                '</ul>',
+                btn: ['确定'],
+                btnAlign: 'center'
+            });
+        });
+    }
+
+    //修改密码
+    function changePassword() {
+        layui.use(['layer'], function () {
+            var layer = layui.layer;
+            layer.open({
+                type: 1,
+                title: "修改密码",
+                area: '400px',
+                offset: '120px',
+                content: $("#pswModel1").html()
+            });
+        })
+    }
+</script>
+</html>

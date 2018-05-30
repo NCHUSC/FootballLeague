@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>用户列表</title>
+</head>
+<body>
+<table border="1">
+    <thead>
+    <tr>
+        <td>ID</td>
+        <td>账号</td>
+        <td>联系方式</td>
+        <td>密码</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${userModel.userList.size()} eq 0">
+        <td colspan="4">没有用户信息！</td>
+    </tr>
+    <tr th:each="user:${userModel.userList}">
+        <td th:text="${user.user_id}">1</td>
+        <td th:text="${user.account}">hurley</td>
+        <td th:text="${user.tel}">136</td>
+        <td th:text="${user.password}">huang520</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

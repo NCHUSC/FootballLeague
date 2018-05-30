@@ -1,0 +1,15 @@
+.send_cont {
+  width: 300px;
+  margin: 50px auto 0; }
+  .send_cont textarea {
+    width: 100%;
+    height: 100px;
+    resize: vertical;
+    box-sizing: border-box;
+    border-radius: 5px;
+    padding: 10px 10px;
+    outline: none;
+    text-indent: 20px;
+    margin-bottom: 20px; }
+  .send_cont .head {
+    padding: 10px 0; }

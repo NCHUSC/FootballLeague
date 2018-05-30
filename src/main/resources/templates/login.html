@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="user-scalable=no,width=device-width,initial-scale=1,maximum-scale=1">
+    <title>足球联赛管理系统登录界面</title>
+    <link rel="stylesheet" type="text/css" href="/css/common.css">
+    <link rel="stylesheet" type="text/css" href="/css/login.css">
+    <!--<link async href="http://fonts.googleapis.com/css?family=Aclonica" data-generated="http://enjoycss.com" rel="stylesheet" type="text/css">-->
+    <script src="/js/jquery.js"></script>
+
+</head>
+<body>
+<div class="wrapper">
+    <div id="bg_picture" style="background-image: url(/images/bg_picture.jpg)"></div>
+</div>
+
+<div class="login_cont">
+    <div class="login_topic">
+        足球联赛管理系统
+    </div>
+    <div class="login_nav">
+        <div class="nav_slider">
+            <a href="#" th:href="@{login.html}" class="signin focus">登录</a>
+            <a href="#" th:href="@{/register}" class="signup">注册</a>
+        </div>
+    </div>
+
+    <form action="index.html" th:action="@{/login}" method="post">
+        <div class="input_signin active">
+            <input name="account" class="input" id="login_user_name" type="text" aria-label="用户名" placeholder="用户名">
+            <div class="hint">请输入用户名</div>
+            <input name="password" class="input" id="login_password" type="password" aria-label="密码" placeholder="密码">
+            <div class="hint">请输入密码</div>
+            <div class="" style="padding: 0 0 30px 0;">
+                <select class="selects" name="kind">
+                    <option value="">用户类型</option>
+                    <option value="0">管理员</option>
+                    <option value="1">普通用户</option>
+                </select>
+            </div>
+            <p style="color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p>
+            <input type="submit" id="button" class="button" name="button" value="登录">
+            <div class="forget">
+                <a href="forget.html">忘记密码？</a>
+            </div>
+        </div>
+    </form>
+
+</div>
+
+
+<script type="text/javascript" src="/js/login.js"></script>
+<script type="text/javascript" src="/js/form.js"></script>
+<script type="text/javascript" src="/config.js"></script>
+<script type="text/javascript" src="/js/login_ajax.js"></script>
+
+<script>
+    var unSelected="#999";
+    var selected="#333";
+    $(function () {
+        $("select").css("color",unSelected);
+        $("option").css("color",selected);
+        $("select").change(function () {
+            var selltem=$(this).val();
+            if(selltem==$(this).find('option:first').val()){
+                $(this).css("color",unSelected);
+            }
+            else{
+                $(this).css("color",selected);
+            }
+        });
+    })
+</script>
+
+</body>
+</html>

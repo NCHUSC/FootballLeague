@@ -1,0 +1,17 @@
+.received_cont {
+  width: 400px;
+  margin: 50px auto 0;
+  height: 300px; }
+  .received_cont .list {
+    box-sizing: border-box;
+    padding: 10px;
+    border: 1px solid #ddeafb;
+    margin-bottom: 10px;
+    border-radius: 5px; }
+    .received_cont .list .number,
+    .received_cont .list .send_people,
+    .received_cont .list .from {
+      line-height: 20px; }
+    .received_cont .list .lable {
+      width: 70px;
+      text-align: right; }

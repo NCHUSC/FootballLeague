@@ -1,0 +1,188 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>添加赛制详情</title>
+    <link rel="stylesheet" href="/plugins/layui/css/layui.css" media="all">
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin layui-bg-blue">
+    <!-- 头部区域 -->
+    <div th:replace="index::topbar"></div>
+
+    <!-- 左侧导航区域 -->
+    <div th:replace="index::sidebar"></div>
+
+    <!-- 底部固定区域 -->
+    <div th:replace="index::bottombar"></div>
+
+    <!-- 内容主体区域 -->
+    <div class="layui-body">
+        <form class="layui-form" method="post" th:action="@{/addLeagueDetail(league_id=${league.league_id})}" th:object="${league}">
+            <br>
+            <input type="hidden" name="league_id" th:value="*{league_id}"/>
+            <div class="layui-form-item">
+                <label class="layui-form-label">[[${session.league1}]]</label>
+                <div class="layui-input-block" style="width:20%">
+                    <select name="level" lay-verify="required">
+                        <option value="">请选择赛事性质</option>
+                        <option value="0">社会/企业</option>
+                        <option value="1">大学</option>
+                        <option value="2">高中</option>
+                        <option value="3">初中</option>
+                        <option value="4">小学</option>
+                        <option value="5">幼儿园</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">几人制联赛</label>
+                <div class="layui-input-block" style="width:20%">
+                    <select name="number" lay-verify="required">
+                        <option value="">请选择几人制联赛</option>
+                        <option value="0">3</option>
+                        <option value="1">4</option>
+                        <option value="2">5</option>
+                        <option value="3">6</option>
+                        <option value="4">7</option>
+                        <option value="5">8</option>
+                        <option value="5">9</option>
+                        <option value="5">10</option>
+                        <option value="5">11</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">赛事性别</label>
+                <div class="layui-input-inline">
+                    <select name="gender" lay-verify="required">
+                        <option value="">请选择赛事性别</option>
+                        <option value="0">不限</option>
+                        <option value="1">男足</option>
+                        <option value="2">女足</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">半场时间</label>
+                <div class="layui-input-inline">
+                    <select name="halfTime" lay-verify="required">
+                        <option value="">请选择半场时间</option>
+                        <option value="0">10分钟</option>
+                        <option value="1">20分钟</option>
+                        <option value="2">30分钟</option>
+                        <option value="3">40分钟</option>
+                        <option value="4">45分钟</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">中场休息时间</label>
+                <div class="layui-input-inline">
+                    <select name="halfRelaxTime" lay-verify="required">
+                        <option value="">请选择中场休息时间</option>
+                        <option value="0">5分钟</option>
+                        <option value="1">10分钟</option>
+                        <option value="2">20分钟</option>
+                        <option value="3">30分钟</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">弃权默认比分</label>
+                <div class="layui-input-inline">
+                    <select name="abstentionScore" lay-verify="required">
+                        <option value="">请选择弃权默认比分</option>
+                        <option value="0">1:0(负)</option>
+                        <option value="1">2:0(负)</option>
+                        <option value="2">3:0(负)</option>
+                        <option value="3">4:0(负)</option>
+                        <option value="4">5:0(负)</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button type="hidden" name="id" th:value="${session.league1}"></button>
+                    <button type="submit" class="layui-btn layui-btn-normal" lay-submit lay-filter="*">确认</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- 修改密码弹窗 -->
+<script type="text/html" id="pswModel1">
+    <div id="pswModel" th:replace="index::changePsw">
+    </div>
+</script>
+
+</body>
+
+<script src="/plugins/layui/layui.js"></script>
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/citydata.min.js"></script>
+<script type="text/javascript" src="/js/cityPicker-2.0.0.js"></script>
+
+<script>
+    layui.use('form', function(){
+        var form = layui.form;
+
+        //各种基于事件的操作，下面会有进一步介绍
+    });
+
+    layui.use('element', function(){
+        var element = layui.element;
+
+        //一些事件监听
+        element.on('tab(demo)', function(data){
+            console.log(data);
+        });
+    });
+
+    //侧边导航栏展开并选中添加球员选项
+    $("#leagueManage").addClass("layui-nav-itemed");
+    $("#addLeagueDetails").addClass("layui-this");
+
+    //显示个人信息
+    function info() {
+        layui.use(['layer'], function(){
+            var layer = layui.layer;
+            layer.open({
+                type:1,
+                title:'个人信息',
+                area:'350px',
+                offset:'120px',
+                content:'<ul style="padding:25px 35px 8px 35px;">' +
+                '<li>用户名：[[${session.loginUser}]]</li>'+
+                '<li>手机号：13657936306</li>'+
+                '</ul>',
+                btn:['确定'],
+                btnAlign:'center'
+            });
+        });
+    }
+
+    //修改密码
+    function changePassword() {
+        layui.use(['layer'],function () {
+            var layer=layui.layer;
+            layer.open({
+                type: 1,
+                title: "修改密码",
+                area: '400px',
+                offset: '120px',
+                content: $("#pswModel1").html()
+            });
+        })
+    }
+
+</script>
+
+</html>
+
+
+
+
+

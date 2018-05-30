@@ -1,0 +1,32 @@
+.count,
+.about,
+.out {
+  width: 400px;
+  margin: 20px auto 0;
+  box-sizing: border-box;
+  padding: 10px 20px;
+  line-height: 30px;
+  font-size: 24px;
+  border: 1px solid #bfc4cc;
+  border-left: 0;
+  border-right: 0; }
+
+.about_left,
+.about_right,
+.count_left,
+.count_right {
+  display: inline-block;
+  box-sizing: border-box;
+  width: 50%; }
+
+.about_right,
+.count_right {
+  text-align: right; }
+
+.about_left,
+.count_left {
+  text-align: left; }
+
+.out {
+  margin-top: 100px;
+  text-align: center; }

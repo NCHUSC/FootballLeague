@@ -1,0 +1,17 @@
+.info_cont {
+  margin: 50px auto 0;
+  width: 400px;
+  box-sizing: border-box;
+  padding: 10px; }
+  .info_cont .info {
+    padding: 10px 0; }
+  .info_cont .lable {
+    width: 90px;
+    text-align: right; }
+  .info_cont .bt {
+    margin: 30px auto 0;
+    display: block; }
+  .info_cont input {
+    width: 280px; }
+  .info_cont .active {
+    border: 1px solid; }

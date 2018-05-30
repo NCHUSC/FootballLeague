@@ -1,0 +1,236 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>上传照片</title>
+    <link rel="stylesheet" href="/plugins/layui/css/layui.css" media="all">
+    <!--<link rel="stylesheet" href="/plugins/zui/lib/uploader/zui.uploader.min.css">-->
+    <!--<link rel="stylesheet" type="text/css" href="/plugins/bootstrap/css/bootstrap.css">-->
+    <!--<link rel="stylesheet" href="//cdn.bootcss.com/zui/1.8.1/css/zui.min.css">-->
+</head>
+
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin layui-bg-blue">
+    <!-- 头部区域 -->
+    <div th:replace="index::topbar"></div>
+
+    <!-- 左侧导航区域 -->
+    <div th:replace="index::sidebar"></div>
+
+    <!-- 底部固定区域 -->
+    <div th:replace="index::bottombar"></div>
+
+    <!-- 内容主体区域 -->
+    <div class="layui-body">
+
+        <!--ZUI上传图片-->
+        <!--<div id="uploaderExample" class="uploader">
+            <div class="file-list" data-drag-placeholder="请拖拽文件到此处"></div>
+            <button type="button" class="btn btn-primary uploader-btn-browse"><i class="icon icon-cloud-upload"></i>选择文件</button>
+        </div>-->
+
+        <!--layui上传图片-->
+        <!--普通图片上传-->
+        <!--<fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+            <legend>常规使用：普通图片上传</legend>
+        </fieldset>-->
+        <div class="layui-upload" style="margin: 200px auto;width: 600px">
+            <div class="layui-upload-list">
+                <img class="layui-upload-img" style="width: 550px;height: 400px;margin: 0 10px 10px 0;" id="demo1">
+                <!--<p id="demoText"></p>-->
+            </div>
+            <button type="button" class="layui-btn" id="test1">上传图片</button>
+            <!--<a th:href="@{/albums}">-->
+            <a th:href="@{/showPhoto(league_id=${league.league_id})}">
+                <button type="button" class="layui-btn layui-btn-normal">完成</button>
+            </a>
+        </div>
+
+        <!--上传多张图片-->
+        <!--<fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+            <legend>上传多张图片</legend>
+        </fieldset>
+
+        <div class="layui-upload">
+            <button type="button" class="layui-btn" id="test2">上传图片</button>
+            <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
+                预览图：
+                <div class="layui-upload-list" style="width: 300px;height: 250px;" id="demo2"></div>
+            </blockquote>
+            <a th:href="@{/showPhoto(league_id=${league.league_id})}">
+                <button type="button" class="layui-btn layui-btn-normal">完成</button>
+            </a>
+        </div>-->
+
+        <!--选完文件后不自动上传-->
+        <!--<fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+            <legend>选完文件后不自动上传</legend>
+        </fieldset>
+        <div class="layui-upload">
+            <button type="button" class="layui-btn layui-btn-primary" id="test8">选择文件</button>
+            &lt;!&ndash;<div class="layui-upload-list">
+                <img class="layui-upload-img" style="width: 92px;height: 92px;margin: 0 10px 10px 0;" id="demo1">
+                <p id="demoText"></p>
+            </div>&ndash;&gt;
+            <button type="button" class="layui-btn" id="test9">开始上传</button>
+        </div>
+        <a th:href="@{/showPhoto(league_id=${league.league_id})}">
+            <button type="button" class="layui-btn layui-btn-normal">完成</button>
+        </a>-->
+</div>
+</div>
+
+<!-- 修改密码弹窗 -->
+<script type="text/html" id="pswModel1">
+    <div id="pswModel" th:replace="index::changePsw">
+    </div>
+</script>
+
+</body>
+
+<!--<script src="/plugins/zui/lib/uploader/zui.uploader.min.js"></script>-->
+<script src="/plugins/layui/layui.js"></script>
+<script type="text/javascript" src="/js/jquery.js"></script>
+
+<script>
+    layui.use('form', function(){
+        var form = layui.form;
+
+        //各种基于事件的操作，下面会有进一步介绍
+    });
+
+    //点击事件
+    layui.use('element', function(){
+        var element = layui.element;
+
+    });
+
+
+    //ZUI上传图片
+    /*$('#uploaderExample').uploader({
+        autoUpload: true,            // 当选择文件后立即自动进行上传操作
+        url: '/images'  // 文件上传提交地址
+    });*/
+
+    //layui上传图片
+    layui.use('upload',function () {
+        var $ = layui.jquery
+            ,upload = layui.upload;
+
+        //普通图片上传
+        var uploadInst = upload.render({
+            elem: '#test1'
+            ,url: '/addPhoto/'
+            ,before: function(obj){
+                //预读本地文件示例，不支持ie8
+                obj.preview(function(index, file, result){
+                    $('#demo1').attr('src', result); //图片链接（base64）
+                });
+            }
+            ,done: function(res){
+                //如果上传失败
+                if(res.code > 0){
+                    return layer.msg('上传失败');
+                }
+                //上传成功
+                layer.msg('上传成功');
+            }
+            ,error: function(){
+                //演示失败状态，并实现重传
+                var demoText = $('#demoText');
+                demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-mini demo-reload">重试</a>');
+                demoText.find('.demo-reload').on('click', function(){
+                    uploadInst.upload();
+                });
+            }
+        });
+
+        //多图片上传
+        /*upload.render({
+            elem: '#test2'
+            ,url: '/addPhoto/'
+            ,multiple: true
+            ,before: function(obj){
+                //预读本地文件示例，不支持ie8
+                obj.preview(function(index, file, result){
+                    $('#demo2').append('<img src="'+ result +'" alt="'+ file.name +'" class="layui-upload-img">')
+                });
+            }
+            ,done: function(res){
+                //如果上传失败
+                if(res.code > 0){
+                    return layer.msg('上传失败');
+                }
+                //上传成功
+                layer.msg('上传成功');
+            }
+            ,error: function(){
+                //演示失败状态，并实现重传
+                var demoText = $('#demoText');
+                demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-mini demo-reload">重试</a>');
+                demoText.find('.demo-reload').on('click', function(){
+                    uploadInst.upload();
+                });
+            }
+        });*/
+
+        //选完文件后不自动上传
+        /*upload.render({
+            elem: '#test8'
+            ,url: '/addPhoto/'
+            ,auto: false
+            //,multiple: true
+            /!*,bindAction: '#test9'*!/
+            /!*,before: function (obj) {
+                //预览本地文件实例
+                obj.preview(function (index,file,result) {
+                    $('demo1').attr('src',result);      //图片链接（base64）
+                });
+            }*!/
+            ,done: function(res){
+                //如果上传失败
+                if(res.code > 0){
+                    return layer.msg('上传失败');
+                }
+                //上传成功
+                layer.msg('上传成功');
+                console.log(res)
+            }
+        });*/
+
+    });
+
+    //显示个人信息
+    function info() {
+        layui.use(['layer'], function(){
+            var layer = layui.layer;
+            layer.open({
+                type:1,
+                title:'个人信息',
+                area:'350px',
+                offset:'120px',
+                content:'<ul style="padding:25px 35px 8px 35px;">' +
+                '<li>用户名：[[${session.loginUser}]]</li>'+
+                '<li>联系方式：[[${session.tel}]]</li>'+
+                '</ul>',
+                btn:['确定'],
+                btnAlign:'center'
+            });
+        });
+    }
+
+    //修改密码
+    function changePassword() {
+        layui.use(['layer'],function () {
+            var layer=layui.layer;
+            layer.open({
+                type: 1,
+                title: "修改密码",
+                area: '400px',
+                offset: '120px',
+                content: $("#pswModel1").html()
+            });
+        })
+    }
+</script>
+</html>

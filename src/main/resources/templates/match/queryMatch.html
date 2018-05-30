@@ -1,0 +1,188 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>查询比赛信息</title>
+    <link rel="stylesheet" href="/plugins/layui/css/layui.css" media="all">
+    <!--<link rel="stylesheet" type="text/css" href="/css/city-picker.css">-->
+    <!--<link rel="stylesheet" type="text/css" href="/plugins/bootstrap/css/bootstrap.css">-->
+    <!--<link rel="stylesheet" href="//cdn.bootcss.com/zui/1.8.1/css/zui.min.css">-->
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin layui-bg-blue">
+    <!-- 头部区域 -->
+    <div th:replace="index::topbar"></div>
+
+    <!-- 左侧导航区域 -->
+    <div th:replace="index::sidebar"></div>
+
+    <!-- 底部固定区域 -->
+    <div th:replace="index::bottombar"></div>
+
+    <!-- 内容主体区域 -->
+    <div class="layui-body">
+        <div class="layui-tab layui-tab-brief" lay-filter="condition">
+            <label class="layui-form-label" style="font-size: large">查询条件</label>
+            <ul class="layui-tab-title">
+                <li>根据id查询</li>
+                <li class="layui-this">根据比赛日期查询</li>
+                <li>根据比赛轮次查询</li>
+                <li>根据球队查询</li>
+            </ul>
+            <div class="layui-tab-content">
+                <!-- 根据id查询 -->
+                <div class="layui-tab-item">
+                    <div class="layui-form-item" style="margin: 100px auto;width: 800px">
+                        <div class="layui-input-block" style="width: 35%;display: inline-block">
+                            <input type="text" name="title" required  lay-verify="required" placeholder="请输入比赛id" autocomplete="off" class="layui-input">
+                        </div>
+                        <button style="display: inline-block" class="layui-btn layui-btn-normal">搜索</button>
+                    </div>
+                </div>
+                <!-- 根据比赛日期查询 -->
+                <div class="layui-tab-item layui-show">
+                    <div class="layui-form-item" style="margin: 100px auto;width: 800px">
+                        <div class="layui-input-block" style="width: 35%;display: inline-block">
+                            <input type="text" class="layui-input" id="MatchTime" placeholder="请选择比赛日期">
+                        </div>
+                        <a href="#" th:href="@{showMatch}"><button style="display: inline-block" class="layui-btn layui-btn-normal">搜索</button></a>
+                    </div>
+                </div>
+
+                <!-- 根据比赛轮次查询 -->
+                <div class="layui-tab-item">
+                    <div class="layui-form">
+                        <div class="layui-form-item" style="margin: 100px auto;width: 800px">
+                            <div class="layui-input-block" style="width: 35%;display: inline-block">
+                                <select name="position" lay-verify="required">
+                                    <option value="">请选择比赛轮次</option>
+                                    <option value="0">第1轮</option>
+                                    <option value="1">第2轮</option>
+                                    <option value="2">第3轮</option>
+                                    <option value="3">第4轮</option>
+                                    <option value="4">第5轮</option>
+                                    <option value="5">第6轮</option>
+                                    <option value="6">第7轮</option>
+                                    <option value="7">第8轮</option>
+                                    <option value="8">第9轮</option>
+                                    <option value="9">第10轮</option>
+                                    <option value="10">第11轮</option>
+                                    <option value="11">第12轮</option>
+                                    <option value="12">第13轮</option>
+                                    <option value="13">第14轮</option>
+                                    <option value="14">第15轮</option>
+                                    <option value="15">第16轮</option>
+                                    <option value="16">第17轮</option>
+                                    <option value="17">第18轮</option>
+                                    <option value="18">第19轮</option>
+                                    <option value="19">第20轮</option>
+                                    <option value="20">第21轮</option>
+                                    <option value="21">第22轮</option>
+                                    <option value="22">第23轮</option>
+                                    <option value="23">第24轮</option>
+                                    <option value="24">第25轮</option>
+                                    <option value="25">第26轮</option>
+                                    <option value="26">第27轮</option>
+                                    <option value="27">第28轮</option>
+                                    <option value="28">第29轮</option>
+                                    <option value="29">第30轮</option>
+                                </select>
+                            </div>
+                            <button style="display: inline-block" class="layui-btn layui-btn-normal">搜索</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- 根据球队查询 -->
+                <div class="layui-tab-item">
+                    <div class="layui-form">
+                        <div class="layui-form-item" style="margin: 100px auto;width: 800px">
+                            <div class="layui-input-block" style="width: 35%;display: inline-block">
+                                <select name="league" lay-verify="required">
+                                    <option value="">请选择参赛球队</option>
+                                </select>
+                            </div>
+                            <button style="display: inline-block" class="layui-btn layui-btn-normal">搜索</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 修改密码弹窗 -->
+<script type="text/html" id="pswModel1">
+    <div id="pswModel" th:replace="index::changePsw">
+    </div>
+</script>
+
+</body>
+
+<script src="/plugins/layui/layui.js"></script>
+<script type="text/javascript" src="/js/jquery.js"></script>
+
+<script>
+
+    /*时间选择器*/
+    layui.use('laydate', function(){
+        var starttime = layui.laydate;
+        //执行一个laydate实例
+        starttime.render({
+            elem:'#MatchTime'
+            ,theme:'#1E9FFF'
+        });
+    });
+
+    layui.use('form', function(){
+        var form = layui.form;
+
+        //各种基于事件的操作，下面会有进一步介绍
+    });
+
+    layui.use('element', function(){
+        var element = layui.element;
+
+        //一些事件监听
+        element.on('tab(condition)', function(data){
+            console.log(data);
+        });
+    });
+
+    //侧边导航栏展开并选中添加球员选项
+    $("#matchManage").addClass("layui-nav-itemed");
+    $("#queryMatch").addClass("layui-this");
+
+    //显示个人信息
+    function info() {
+        layui.use(['layer'], function(){
+            var layer = layui.layer;
+            layer.open({
+                type:1,
+                title:'个人信息',
+                area:'350px',
+                offset:'120px',
+                content:'<ul style="padding:25px 35px 8px 35px;">' +
+                '<li>用户名：[[${session.loginUser}]]</li>'+
+                '<li>手机号：13657936306</li>'+
+                '</ul>',
+                btn:['确定'],
+                btnAlign:'center'
+            });
+        });
+    }
+
+    //修改密码
+    function changePassword() {
+        layui.use(['layer'],function () {
+            var layer=layui.layer;
+            layer.open({
+                type: 1,
+                title: "修改密码",
+                area: '400px',
+                offset: '120px',
+                content: $("#pswModel1").html()
+            });
+        })
+    }
+</script>
+</html>

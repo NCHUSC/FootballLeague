@@ -1,0 +1,243 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>足球联赛管理系统主界面</title>
+    <link rel="stylesheet" href="/plugins/layui/css/layui.css">
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin layui-bg-blue">
+    <!-- 头部区域（可配合layui已有的水平导航） -->
+    <div class="layui-header layui-bg-blue" th:fragment="topbar">
+        <div class="layui-logo" style="color:white">足球联赛管理系统</div>
+        <ul class="layui-nav layui-layout-left">
+            <li class="layui-nav-item"><a href="#" th:href="@{leagues}">赛事信息</a></li>
+            <li class="layui-nav-item"><a href="#" th:href="@{matches}">比赛信息</a></li>
+            <li class="layui-nav-item"><a href="#" th:href="@{teams}">球队信息</a></li>
+            <li class="layui-nav-item">
+                <a href="javascript:;">统计信息</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="#" th:href="@{scoreboard}">积分榜</a></dd>
+                    <dd><a href="#" th:href="@{shooterboard}">射手榜</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item">
+                <a href="#" th:href="@{albums}">相册</a>
+                <!--<dl class="layui-nav-child">
+                    <dd><a href="#">上传照片</a></dd>
+                    <dd><a href="#">创建相册</a></dd>
+                </dl>-->
+            </li>
+        </ul>
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item">
+                <a href="javascript:;">
+                    <!--<img src="http://t.cn/RCzsdCq" class="layui-nav-img">-->
+                    <a>[[${session.loginUser}]]</a>
+                </a>
+                <dl class="layui-nav-child">
+                    <dd><a href="#" onclick="info()"><i class="layui-icon">&#xe612;</i>&nbsp;个人信息</a></dd>
+                    <dd><a href="#" onclick="changePassword()"><i class="layui-icon">&#xe631;</i>&nbsp;修改密码</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item"><a href="">退出</a></li>
+        </ul>
+    </div>
+
+    <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+    <div class="layui-side layui-bg-blue" th:fragment="sidebar">
+        <div class="layui-side-scroll layui-bg-blue">
+
+            <ul class="layui-nav layui-nav-tree layui-bg-blue" lay-filter="sidebar">
+                <li id="teamManage" class="layui-nav-item layui-bg-blue">
+                    <a class="" href="javascript:;">球队管理</a>
+                    <dl class="layui-nav-child layui-bg-blue">
+                        <dd id="addTeam"><a href="#" th:href="@{team}">添加球队信息</a></dd>
+                        <dd id="queryTeam"><a href="#" th:href="@{queryTeam}">查询球队信息</a></dd>
+                    </dl>
+                </li>
+                <li id="playerManage" class="layui-nav-item layui-bg-blue">
+                    <a href="javascript:;">球员管理</a>
+                    <dl class="layui-nav-child">
+                        <dd id="addPlayer"><a href="#" th:href="@{player}">添加球员信息</a></dd>
+                        <dd id="queryPlayer"><a href="#" th:href="@{queryPlayer}">查询球员信息</a></dd>
+                    </dl>
+                </li>
+                <li id="leagueManage" class="layui-nav-item layui-bg-blue">
+                    <a href="javascript:;">联赛管理</a>
+                    <dl class="layui-nav-child">
+                        <dd id="addLeagueInformation"><a href="#" th:href="@{league}">添加赛事信息</a></dd>
+                        <!--<dd id="addLeagueDetails"><a href="#" th:href="@{leagueDetail}">添加赛制详情</a></dd>-->
+                        <dd id="queryLeague"><a href="#" th:href="@{queryLeague}">查询赛事信息</a></dd>
+                        <dd id="autoMatch"><a href="#" th:href="@{autoMatch}">自动生成赛程</a></dd>
+                    </dl>
+                </li>
+                <li id="matchManage" class="layui-nav-item layui-bg-blue">
+                    <a href="javascript:;">比赛管理</a>
+                    <dl class="layui-nav-child">
+                        <dd id="addMatchInformation"><a href="#" th:href="@{matchInformation}">添加比赛信息</a></dd>
+                        <dd id="addMatchResult"><a href="#" th:href="@{matchResult}">添加比赛结果</a></dd>
+                        <dd id="queryMatch"><a href="#" th:href="@{queryMatch}">查询比赛信息</a></dd>
+                    </dl>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 内容主体区域 -->
+    <div class="layui-body">
+
+    </div>
+
+    <!-- 底部固定区域 -->
+    <div class="layui-footer" style="color: black" th:fragment="bottombar">
+
+        © https://github.com/HurleyJames 皮皮鹏
+    </div>
+</div>
+<!-- 主页部分结束 -->
+
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script src="/plugins/layui/layui.js"></script>
+
+<!-- 修改密码弹窗 -->
+<script type="text/html" id="pswModel1">
+    <div id="pswModel" th:fragment="changePsw">
+        <form id="pswForm" class="layui-form model-form" action="/modifyUser" method="post">
+            <div class="layui-form-item">
+                <label class="layui-form-label">旧密码</label>
+                <div class="layui-input-block">
+                    <input name="password" style="width:80%;" placeholder="请输入旧密码" type="password" class="layui-input" maxlength="12" lay-verify="required|pass" required />
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">新密码</label>
+                <div class="layui-input-block">
+                    <input name="newPsw" style="width:80%" placeholder="请输入新密码" type="password" class="layui-input" maxlength="12" lay-verify="required|pass" required />
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">确认密码</label>
+                <div class="layui-input-block">
+                    <input name="renewPsw" style="width:80%" placeholder="请再次输入新密码" type="password" class="layui-input" maxlength="12" lay-verify="required|psw2" required />
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button type="submit" class="layui-btn layui-btn-normal" lay-filter="pswSubmit" lay-submit>修改</button>
+                    <button class="layui-btn layui-btn-primary" type="button" id="pswCancel">取消</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</script>
+
+<script>
+    //JavaScript代码区域
+    layui.use('element', function(){
+        var element = layui.element;
+
+        element.on('nav(sidebar)', function(elem){
+            console.log("点击");
+            console.log(elem);
+        });
+    });
+
+    /*$(".layui-nav-item").click(function () {
+        $(".layui-nav-item").removeClass("layui-nav-itemed");
+        $(".layui-nav-item").removeClass("layui-this");
+        if($(this).has('dl').length){
+            $(this).addClass("layui-nav-itemed");
+        }
+        else{
+            $(this).addClass("layui-this");
+        }
+    });*/
+
+    //显示个人信息
+    function info() {
+        layui.use(['layer'], function(){
+            var layer = layui.layer;
+            layer.open({
+                type:1,
+                title:'个人信息',
+                area:'350px',
+                offset:'120px',
+                content:'<ul style="padding:25px 35px 8px 35px;">' +
+                '<li>用户名：[[${session.loginUser}]]</li>'+
+                '<li>联系方式：[[${session.tel}]]</li>'+
+                '</ul>',
+                btn:['确定'],
+                btnAlign:'center'
+            });
+        });
+    }
+
+    //修改密码
+    function changePassword() {
+        layui.use(['layer'],function () {
+            var layer=layui.layer;
+            layer.open({
+                type: 1,
+                title: "修改密码",
+                area: '400px',
+                offset: '120px',
+                content: $("#pswModel1").html()
+            });
+        })
+    }
+</script>
+
+<!--<script>
+    通过iframe切换内容
+    $(document).ready(function () {
+        var temp="none";
+
+        $("#addTeam").click(function () {
+            showContent(1);
+        });
+
+        $("#modifyTeam").click(function () {
+            showContent(2);
+        })
+
+        $("#deleteTeam").click(function () {
+            showContent(3);
+        })
+
+        $("#addPlayer").click(function () {
+            showContent(4);
+        });
+
+        $("#addLeagueInformation").click(function () {
+            showContent(5);
+        });
+
+        $("#addLeagueDetails").click(function () {
+            showContent(6);
+        })
+
+        $("#addMatchInformation").click(function () {
+            showContent(7);
+        })
+
+        function showContent(obj) {
+            for(var i=1;i<10;i++){
+                if(i==obj){
+                    temp="block";
+                }
+                else{
+                    temp="none";
+                }
+                document.getElementById("content"+i).style.display=temp;
+            }
+        }
+    });
+
+</script>-->
+
+</body>
+</html>
+
+
+

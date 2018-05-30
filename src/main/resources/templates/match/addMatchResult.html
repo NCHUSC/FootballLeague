@@ -1,0 +1,179 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>添加比赛结果</title>
+    <link rel="stylesheet" href="/plugins/layui/css/layui.css" media="all">
+    <!--<link rel="stylesheet" href="//cdn.bootcss.com/zui/1.8.1/css/zui.min.css">-->
+    <!-- ZUI Javascript 依赖 jQuery -->
+    <!--<script src="//cdn.bootcss.com/zui/1.8.1/lib/jquery/jquery.js"></script>-->
+    <!-- ZUI 标准版压缩后的 JavaScript 文件 -->
+    <!--<script src="//cdn.bootcss.com/zui/1.8.1/js/zui.min.js"></script>-->
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin layui-bg-blue">
+    <!-- 头部区域 -->
+    <div th:replace="index::topbar"></div>
+
+    <!-- 左侧导航区域 -->
+    <div th:replace="index::sidebar"></div>
+
+    <!-- 底部固定区域 -->
+    <div th:replace="index::bottombar"></div>
+
+    <!-- 内容主体区域 -->
+    <div class="layui-body">
+        <table class="layui-table">
+            <colgroup>
+                <col width="10%">
+                <col width="30%">
+                <col width="30%">
+                <col width="30%">
+            </colgroup>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>所属于联赛</th>
+                <th>比赛队伍</th>
+                <th>比赛日期</th>
+            </tr>
+            </thead>
+            <!--以下使用thymeleaf模板从数据库中遍历获取数据-->
+            <tbody>
+            <tr>
+                <td>1</td>
+                <td>意大利甲级足球联赛</td>
+                <td>
+                    <span class="guest_team">骑士</span>
+                    <span class="logo"></span>
+                    <span class="score"> VS </span>
+                    <span class="logo"></span>
+                    <span class="home_team">热火</span>
+                </td>
+                <td>2018-05-18</td>
+            </tr>
+            </tbody>
+        </table>
+        <br>
+        <form class="layui-form">
+            <div class="layui-form-item">
+                <label class="layui-form-label">*客队比分</label>
+                <div class="layui-input-inline">
+                    <input type="text" class="layui-input" id="guest_score" placeholder="请输入客队比分">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">*主队比分</label>
+                <div class="layui-input-inline">
+                    <input type="text" class="layui-input" id="home_score" placeholder="请输入主队比分">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">*比赛获胜方</label>
+                <div class="layui-input-inline">
+                    <select>
+                        <option value=""></option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">*客队进球球员</label>
+                <div class="layui-input-inline">
+                    <div id="guest_player">
+                        <select>
+                            <option value="">请选择球员</option>
+                        </select>
+                        <select>
+                            <option value="">请选择进球数</option>
+                        </select>
+                    </div>
+                    <div id="tags"></div>
+                </div>
+                <input type="button" value="添加" onclick="addData()"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- 修改密码弹窗 -->
+<script type="text/html" id="pswModel1">
+    <div id="pswModel" th:replace="index::changePsw">
+    </div>
+</script>
+
+<script src="/plugins/layui/layui.js"></script>
+<script type="text/javascript" src="/js/jquery.js"></script>
+
+<script>
+    layui.use('form', function(){
+        var form = layui.form;
+
+        //各种基于事件的操作，下面会有进一步介绍
+    });
+
+    layui.use('laydate', function(){
+        var matchTime = layui.laydate;
+        //执行一个laydate实例
+        matchTime.render({
+            elem:'#matchTime'
+            ,theme:'#1E9FFF'
+        });
+    });
+</script>
+<script>
+
+    layui.use('element', function(){
+        var element = layui.element;
+
+        //一些事件监听
+        element.on('tab(demo)', function(data){
+            console.log(data);
+        });
+    });
+
+    //侧边导航栏展开并选中添加比赛选项
+    $("#matchManage").addClass("layui-nav-itemed");
+    $("#addMatchResult").addClass("layui-this");
+
+    //显示个人信息
+    function info() {
+        layui.use(['layer'], function(){
+            var layer = layui.layer;
+            layer.open({
+                type:1,
+                title:'个人信息',
+                area:'350px',
+                offset:'120px',
+                content:'<ul style="padding:25px 35px 8px 35px;">' +
+                '<li>用户名：[[${session.loginUser}]]</li>'+
+                '<li>手机号：13657936306</li>'+
+                '</ul>',
+                btn:['确定'],
+                btnAlign:'center'
+            });
+        });
+    }
+
+    //修改密码
+    function changePassword() {
+        layui.use(['layer'],function () {
+            var layer=layui.layer;
+            layer.open({
+                type: 1,
+                title: "修改密码",
+                area: '400px',
+                offset: '120px',
+                content: $("#pswModel1").html()
+            });
+        })
+    }
+
+
+    function addData() {
+        var str="<input placeholder='请选择球员'>";
+        document.getElementById("tags").innerHTML+=str;
+    }
+</script>
+
+</body>
+</html>
