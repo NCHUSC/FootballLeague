@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>查询球队信息</title>
+    <title>球队查询</title>
     <link rel="stylesheet" href="/plugins/layui/css/layui.css" media="all">
     <link rel="stylesheet" type="text/css" href="/css/city-picker.css">
     <!--<link rel="stylesheet" type="text/css" href="/plugins/bootstrap/css/bootstrap.css">-->
@@ -34,49 +34,66 @@
                 <!-- 根据id查询 -->
                 <div class="layui-tab-item">
                     <div class="layui-form-item" style="margin: 100px auto;width: 800px">
-                        <div class="layui-input-block" style="width: 35%;display: inline-block">
-                            <input type="text" name="title" required  lay-verify="required" placeholder="请输入球队id" autocomplete="off" class="layui-input">
-                        </div>
-                        <button style="display: inline-block" class="layui-btn layui-btn-normal">搜索</button>
+                        <form th:action="@{/showTeam}" method="post">
+                            <div class="layui-input-block" style="width: 35%;display: inline-block">
+                                <input type="text" name="id" required  lay-verify="required" placeholder="请输入球队id" autocomplete="off" class="layui-input">
+                            </div>
+                            <button style="display: inline-block" class="layui-btn layui-btn-normal" type="submit">搜索</button>
+                        </form>
                     </div>
                 </div>
                 <!-- 根据球队名称查询 -->
                 <div class="layui-tab-item layui-show">
                     <div class="layui-form-item" style="margin: 100px auto;width: 800px">
-                        <div class="layui-input-block" style="width: 35%;display: inline-block">
-                            <input type="text" name="title" required  lay-verify="required" placeholder="请输入球队名称" autocomplete="off" class="layui-input">
-                        </div>
-                        <a href="#" th:href="@{showTeam}"><button style="display: inline-block" class="layui-btn layui-btn-normal">搜索</button></a>
+                        <form th:action="@{/showTeam}" method="post">
+                            <div class="layui-input-block" style="width: 35%;display: inline-block">
+                                <input type="text" name="teamName" required  lay-verify="required" placeholder="请输入球队名称" autocomplete="off" class="layui-input">
+                            </div>
+                            <button style="display: inline-block" class="layui-btn layui-btn-normal" type="submit">搜索</button>
+                        </form>
                     </div>
                 </div>
                 <!-- 根据所在主场查询 -->
                 <div class="layui-tab-item">
                     <div class="layui-form-item" style="margin: 100px auto;width: 800px">
-                        <div class="layui-input-block" style="width: 35%;display: inline-block">
-                            <input type="text" class="layui-input" id="StartTime" placeholder="请输入球队所在主场">
-                        </div>
-                        <button style="display: inline-block" class="layui-btn layui-btn-normal">搜索</button>
+                        <form th:action="@{/showTeam}" method="post">
+                            <div class="layui-input-block" style="width: 35%;display: inline-block">
+                                <input type="text" name="home" class="layui-input" id="StartTime" placeholder="请输入球队所在主场">
+                            </div>
+                            <button style="display: inline-block" class="layui-btn layui-btn-normal" type="submit">搜索</button>
+                        </form>
                     </div>
                 </div>
                 <!-- 根据所在城市查询 -->
                 <div class="layui-tab-item">
-                    <div class="layui-form-item" style="margin: 100px auto;width: 500px">
-                        <div style="display: inline;float:left;margin-right: 5px" class="city-picker-selector" id="city-picker-search"></div>
-                        <button style="display: inline-block;float:left;" class="layui-btn layui-btn-normal">搜索</button>
+                    <div class="layui-form">
+                        <form th:action="@{showTeam}" method="post">
+                            <div class="layui-form-item" style="margin: 100px auto;width: 800px">
+                                <div class="layui-input-block" style="width: 35%;display: inline-block">
+                                    <!--<input type="text" name="title" required  lay-verify="required" placeholder="请输入联赛名称" autocomplete="off" class="layui-input">-->
+                                    <select name="city" lay-verify="required">
+                                        <option th:each="city:${citys}">[[${city}]]</option>
+                                    </select>
+                                </div>
+                                <button style="display: inline-block" class="layui-btn layui-btn-normal" type="submit">搜索</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
                 <!-- 根据所属联赛查询 -->
                 <div class="layui-tab-item">
                     <div class="layui-form">
-                        <div class="layui-form-item" style="margin: 100px auto;width: 800px">
-                            <div class="layui-input-block" style="width: 35%;display: inline-block">
-                                <!--<input type="text" name="title" required  lay-verify="required" placeholder="请输入联赛名称" autocomplete="off" class="layui-input">-->
-                                <select name="league" lay-verify="required">
-                                    <option value="">请选择所属联赛</option>
-                                </select>
+                        <form th:action="@{showTeam}" method="post">
+                            <div class="layui-form-item" style="margin: 100px auto;width: 800px">
+                                <div class="layui-input-block" style="width: 35%;display: inline-block">
+                                    <!--<input type="text" name="title" required  lay-verify="required" placeholder="请输入联赛名称" autocomplete="off" class="layui-input">-->
+                                    <select name="league" lay-verify="required">
+                                        <option th:each="league:${leagues}">[[${league}]]</option>
+                                    </select>
+                                </div>
+                                <button style="display: inline-block" class="layui-btn layui-btn-normal" type="submit">搜索</button>
                             </div>
-                            <button style="display: inline-block" class="layui-btn layui-btn-normal">搜索</button>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>

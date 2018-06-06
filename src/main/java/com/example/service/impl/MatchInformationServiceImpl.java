@@ -19,6 +19,16 @@ public class MatchInformationServiceImpl implements MatchInformationService {
     }
 
     @Override
+    public List<MatchInformation> getAllMatchInformation() {
+        return matchInformationMapper.getAllMatchInformation();
+    }
+
+    @Override
+    public MatchInformation getMatchInformationById(Integer id) {
+        return matchInformationMapper.getMatchInformationById(id);
+    }
+
+    @Override
     public List<MatchInformation> getMatchInformationByLeague(String league) {
         return matchInformationMapper.getMatchInformationByLeague(league);
     }

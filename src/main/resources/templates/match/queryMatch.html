@@ -24,28 +24,20 @@
         <div class="layui-tab layui-tab-brief" lay-filter="condition">
             <label class="layui-form-label" style="font-size: large">查询条件</label>
             <ul class="layui-tab-title">
-                <li>根据id查询</li>
                 <li class="layui-this">根据比赛日期查询</li>
                 <li>根据比赛轮次查询</li>
                 <li>根据球队查询</li>
             </ul>
             <div class="layui-tab-content">
-                <!-- 根据id查询 -->
-                <div class="layui-tab-item">
-                    <div class="layui-form-item" style="margin: 100px auto;width: 800px">
-                        <div class="layui-input-block" style="width: 35%;display: inline-block">
-                            <input type="text" name="title" required  lay-verify="required" placeholder="请输入比赛id" autocomplete="off" class="layui-input">
-                        </div>
-                        <button style="display: inline-block" class="layui-btn layui-btn-normal">搜索</button>
-                    </div>
-                </div>
                 <!-- 根据比赛日期查询 -->
                 <div class="layui-tab-item layui-show">
                     <div class="layui-form-item" style="margin: 100px auto;width: 800px">
-                        <div class="layui-input-block" style="width: 35%;display: inline-block">
-                            <input type="text" class="layui-input" id="MatchTime" placeholder="请选择比赛日期">
-                        </div>
-                        <a href="#" th:href="@{showMatch}"><button style="display: inline-block" class="layui-btn layui-btn-normal">搜索</button></a>
+                        <form th:action="@{/matchNews_select}" method="post">
+                            <div class="layui-input-block" style="width: 35%;display: inline-block">
+                                <input type="text" class="layui-input" id="MatchTime" name="matchDate"  placeholder="请选择比赛日期">
+                            </div>
+                            <button style="display: inline-block" class="layui-btn layui-btn-normal">搜索</button>
+                        </form>
                     </div>
                 </div>
 
@@ -53,42 +45,24 @@
                 <div class="layui-tab-item">
                     <div class="layui-form">
                         <div class="layui-form-item" style="margin: 100px auto;width: 800px">
-                            <div class="layui-input-block" style="width: 35%;display: inline-block">
-                                <select name="position" lay-verify="required">
-                                    <option value="">请选择比赛轮次</option>
-                                    <option value="0">第1轮</option>
-                                    <option value="1">第2轮</option>
-                                    <option value="2">第3轮</option>
-                                    <option value="3">第4轮</option>
-                                    <option value="4">第5轮</option>
-                                    <option value="5">第6轮</option>
-                                    <option value="6">第7轮</option>
-                                    <option value="7">第8轮</option>
-                                    <option value="8">第9轮</option>
-                                    <option value="9">第10轮</option>
-                                    <option value="10">第11轮</option>
-                                    <option value="11">第12轮</option>
-                                    <option value="12">第13轮</option>
-                                    <option value="13">第14轮</option>
-                                    <option value="14">第15轮</option>
-                                    <option value="15">第16轮</option>
-                                    <option value="16">第17轮</option>
-                                    <option value="17">第18轮</option>
-                                    <option value="18">第19轮</option>
-                                    <option value="19">第20轮</option>
-                                    <option value="20">第21轮</option>
-                                    <option value="21">第22轮</option>
-                                    <option value="22">第23轮</option>
-                                    <option value="23">第24轮</option>
-                                    <option value="24">第25轮</option>
-                                    <option value="25">第26轮</option>
-                                    <option value="26">第27轮</option>
-                                    <option value="27">第28轮</option>
-                                    <option value="28">第29轮</option>
-                                    <option value="29">第30轮</option>
-                                </select>
-                            </div>
-                            <button style="display: inline-block" class="layui-btn layui-btn-normal">搜索</button>
+                            <form th:action="@{/matchNews_select}" method="post">
+                                <div class="layui-input-block" style="width: 35%;display: inline-block">
+                                    <select name="round" lay-verify="required">
+                                        <option value="">请选择比赛轮次</option>
+                                        <option value="第1轮">第1轮</option>
+                                        <option value="第2轮">第2轮</option>
+                                        <option value="第3轮">第3轮</option>
+                                        <option value="第4轮">第4轮</option>
+                                        <option value="第5轮">第5轮</option>
+                                        <option value="第6轮">第6轮</option>
+                                        <option value="第7轮">第7轮</option>
+                                        <option value="第8轮">第8轮</option>
+                                        <option value="第9轮">第9轮</option>
+                                        <option value="第10轮">第10轮</option>
+                                    </select>
+                                </div>
+                                <button style="display: inline-block" class="layui-btn layui-btn-normal">搜索</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -96,12 +70,17 @@
                 <div class="layui-tab-item">
                     <div class="layui-form">
                         <div class="layui-form-item" style="margin: 100px auto;width: 800px">
-                            <div class="layui-input-block" style="width: 35%;display: inline-block">
-                                <select name="league" lay-verify="required">
-                                    <option value="">请选择参赛球队</option>
-                                </select>
-                            </div>
-                            <button style="display: inline-block" class="layui-btn layui-btn-normal">搜索</button>
+                            <form th:action="@{/matchNews_select}" method="post">
+                                <div class="layui-input-block" style="width: 35%;display: inline-block">
+                                    <select name="team" lay-verify="required">
+                                        <option value="">请选择参赛球队</option>
+                                        <options th:each="team:${teams}">
+                                            <option th:value="${team.teamName}" th:text="${team.teamName}"></option>
+                                        </options>
+                                    </select>
+                                </div>
+                                <button style="display: inline-block" class="layui-btn layui-btn-normal">搜索</button>
+                            </form>
                         </div>
                     </div>
                 </div>

@@ -67,4 +67,14 @@ public class TeamServiceImpl implements TeamService {
     public int deleteTeam(Integer id) {
         return teamMapper.deleteTeamById(id);
     }
+
+    @Override
+    public List<String> selectTeamCity() {
+        return teamMapper.selectTeamCity();
+    }
+
+    @Override
+    public List<String> selectTeamLeague() {
+        return teamMapper.selectTeamLeague();
+    }
 }

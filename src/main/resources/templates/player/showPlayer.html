@@ -48,34 +48,18 @@
             </thead>
             <!--以下使用thymeleaf模板从数据库中遍历获取数据-->
             <tbody>
-            <tr>
-                <td>1</td>
-                <td>wade</td>
-                <td>热火</td>
-                <td>3</td>
-                <td>后卫</td>
-                <td>35岁</td>
-                <td>193cm</td>
-                <td>98kg</td>
+            <tr th:each="player:${players}">
+                <td th:text="${player.id}"></td>
+                <td th:text="${player.name}"></td>
+                <td th:text="${player.team}"></td>
+                <td th:text="${player.number}"></td>
+                <td th:text="${player.position}"></td>
+                <td th:text="${player.age}"></td>
+                <td th:text="${player.height}"></td>
+                <td th:text="${player.weight}"></td>
                 <td>
-                    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
-                    <a class="layui-btn layui-btn-xs" lay-event="edit">修改</a>
-                    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
-                </td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>hurley</td>
-                <td>骑士</td>
-                <td>6</td>
-                <td>前锋</td>
-                <td>20岁</td>
-                <td>176cm</td>
-                <td>66kg</td>
-               <td>
-                    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
-                    <a class="layui-btn layui-btn-xs" lay-event="edit">修改</a>
-                    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+                    <a class="layui-btn layui-btn-xs" lay-event="edit" th:href="@{/player_update_switchpage(id=${player.id})}">修改</a>
+                    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del" th:href="@{/player_delete(id=${player.id})}">删除</a>
                 </td>
             </tr>
             </tbody>

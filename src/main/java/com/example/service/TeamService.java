@@ -35,7 +35,7 @@ public interface TeamService {
     List<Team> getTeamById(Integer id);
 
     /**
-     * 按联赛查询
+     * 按所属联赛查询球队
      * @param league
      * @return
      */
@@ -53,4 +53,15 @@ public interface TeamService {
      */
     int deleteTeam (Integer id);
 
+    /**
+     * 查询所有队伍的所在城市
+     * @return
+     */
+    List<String> selectTeamCity();
+
+    /**
+     * 查询所有联赛
+     * @return
+     */
+    List<String> selectTeamLeague();
 }

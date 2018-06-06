@@ -23,90 +23,60 @@
 
     <!-- 内容主体区域 -->
     <div class="layui-body">
-        <form class="layui-form">
+        <form class="layui-form" th:action="@{addMatchInformationFinish(league=${league.leagueName})}" method="post">
             <br>
-            <div class="layui-form-item">
-                <label class="layui-form-label">*所属于的联赛</label>
-                <div class="layui-input-inline">
-                    <select>
-                        <option value=""></option>
-                    </select>
-                </div>
-            </div>
+
             <div class="layui-form-item">
                 <label class="layui-form-label">*比赛时间</label>
                 <div class="layui-inline">
-                    <input type="text" class="layui-input" id="matchTime" placeholder="请选择比赛时间">
+                    <input type="text" class="layui-input" id="matchTime" placeholder="请选择比赛时间" name="matchDate">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">*比赛轮次</label>
                 <div class="layui-input-inline">
-                    <select name="position" lay-verify="required">
-                        <option value="">请选择比赛轮次</option>
-                        <option value="0">第1轮</option>
-                        <option value="1">第2轮</option>
-                        <option value="2">第3轮</option>
-                        <option value="3">第4轮</option>
-                        <option value="4">第5轮</option>
-                        <option value="5">第6轮</option>
-                        <option value="6">第7轮</option>
-                        <option value="7">第8轮</option>
-                        <option value="8">第9轮</option>
-                        <option value="9">第10轮</option>
-                        <option value="10">第11轮</option>
-                        <option value="11">第12轮</option>
-                        <option value="12">第13轮</option>
-                        <option value="13">第14轮</option>
-                        <option value="14">第15轮</option>
-                        <option value="15">第16轮</option>
-                        <option value="16">第17轮</option>
-                        <option value="17">第18轮</option>
-                        <option value="18">第19轮</option>
-                        <option value="19">第20轮</option>
-                        <option value="20">第21轮</option>
-                        <option value="21">第22轮</option>
-                        <option value="22">第23轮</option>
-                        <option value="23">第24轮</option>
-                        <option value="24">第25轮</option>
-                        <option value="25">第26轮</option>
-                        <option value="26">第27轮</option>
-                        <option value="27">第28轮</option>
-                        <option value="28">第29轮</option>
-                        <option value="29">第30轮</option>
-                        <!--<option value="30">第31轮</option>
-                        <option value="31">第32轮</option>
-                        <option value="32">第33轮</option>
-                        <option value="33">第34轮</option>
-                        <option value="34">第35轮</option>
-                        <option value="35">第36轮</option>
-                        <option value="36">第37轮</option>
-                        <option value="37">第38轮</option>-->
+                    <select name="round" lay-verify="required">
+                        <option th:each="matchRound:${matchRounds}">[[${matchRound}]]</option>
                     </select>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">*主队</label>
                 <div class="layui-input-inline">
-                    <select>
-                        <option value=""></option>
+                    <select name="homeTeam">
+                        <option th:each="team:${teams}">[[${team.teamName}]]</option>
                     </select>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">*客队</label>
                 <div class="layui-input-inline">
-                    <select>
-                        <option value=""></option>
+                    <select name="guestTeam">
+                        <option th:each="team:${teams}">[[${team.teamName}]]</option>
                     </select>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">裁判</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="" placeholder="请输入裁判姓名" class="layui-input" autocomplete="off">
+                    <input type="text" name="referee" placeholder="请输入裁判姓名" class="layui-input" autocomplete="off">
                 </div>
             </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">比赛地点</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="field" placeholder="请输入比赛地点" class="layui-input" autocomplete="off">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">比赛状态</label>
+                <div class="layui-input-inline">
+                    <select name="state">
+                        <option >未开始</option>
+                    </select>
+                </div>
+            </div>
+
             <div class="layui-form-item">
                 <div class="layui-input-block">
                     <button class="layui-btn layui-btn-normal" lay-submit lay-filter="*">完成</button>
@@ -196,8 +166,4 @@
 </script>
 
 </html>
-
-
-
-
 

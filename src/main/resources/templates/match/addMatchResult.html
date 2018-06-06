@@ -41,57 +41,115 @@
             <!--以下使用thymeleaf模板从数据库中遍历获取数据-->
             <tbody>
             <tr>
-                <td>1</td>
-                <td>意大利甲级足球联赛</td>
-                <td>
-                    <span class="guest_team">骑士</span>
-                    <span class="logo"></span>
-                    <span class="score"> VS </span>
-                    <span class="logo"></span>
-                    <span class="home_team">热火</span>
-                </td>
-                <td>2018-05-18</td>
+                <td th:text="${matchInformation1.id}"></td>
+                <td th:text="${matchInformation1.league}"></td>
+                <td th:text="${matchInformation1.guestTeam}+VS+${matchInformation1.homeTeam}"></td>
+                <td th:text="${matchInformation1.matchDate}"></td>
             </tr>
             </tbody>
         </table>
         <br>
-        <form class="layui-form">
+
+        <div class="layui-form-item">
+            <form style="float: left" class="layui-form" method="post" th:action="@{/insertPlayerSkill}">
+                <label class="layui-form-label">*主队进球球员</label>
+                <div class="layui-input-inline">
+                    <div id="home_player">
+                        <select name="name">
+                            <option value="">请选择球员</option>
+                            <options th:each="homeTeamPlayer:${homeTeamPlayers}">
+                                <option th:value="${homeTeamPlayer.name}" th:text="${homeTeamPlayer.name}"></option>
+                            </options>
+                        </select>
+                        <br>
+                        <select name="goals">
+                            <option value="">请选择进球数</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                    </div>
+                    <div id="tags1"></div>
+                </div>
+                <input type="hidden" name="id" th:value="${matchInformation1.id}"/>
+                <input type="hidden" name="homeTeam" th:value="${matchInformation1.homeTeam}"/>
+                <input type="hidden" name="guestTeam" th:value="${matchInformation1.guestTeam}"/>
+                <input class="layui-btn layui-btn-normal layui-btn-sm" type="submit" value="添加"/>
+            </form>
+
+            <form class="layui-form" method="post" th:action="@{/insertPlayerSkill}">
+                <label class="layui-form-label">*客队进球球员</label>
+                <div class="layui-input-inline">
+                    <div id="guest_player">
+                        <select name="name">
+                            <option value="">请选择球员</option>
+                            <options th:each="guestTeamPlayer:${guestTeamPlayers}">
+                                <option th:value="${guestTeamPlayer.name}" th:text="${guestTeamPlayer.name}"></option>
+                            </options>
+                        </select>
+                        <br>
+                        <select name="goals">
+                            <option value="">请选择进球数</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                    </div>
+                    <div id="tags2"></div>
+                </div>
+                <input type="hidden" name="id" th:value="${matchInformation1.id}"/>
+                <input type="hidden" name="homeTeam" th:value="${matchInformation1.homeTeam}"/>
+                <input type="hidden" name="guestTeam" th:value="${matchInformation1.guestTeam}"/>
+                <input class="layui-btn layui-btn-normal layui-btn-sm" type="submit" value="添加"/>
+            </form>
+        </div>
+
+
+        <form class="layui-form" th:action="@{/addMatchResult}" method="GET">
             <div class="layui-form-item">
                 <label class="layui-form-label">*客队比分</label>
                 <div class="layui-input-inline">
-                    <input type="text" class="layui-input" id="guest_score" placeholder="请输入客队比分">
+                    <input type="text" class="layui-input" name="guestGoals" id="guest_score" placeholder="请输入客队比分">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">*主队比分</label>
                 <div class="layui-input-inline">
-                    <input type="text" class="layui-input" id="home_score" placeholder="请输入主队比分">
+                    <input type="text" class="layui-input" name="homeGoals" id="home_score" placeholder="请输入主队比分">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">*比赛获胜方</label>
                 <div class="layui-input-inline">
-                    <select>
-                        <option value=""></option>
+                    <select name="winner">
+                        <option value="">请选择比赛获胜方</option>
+                        <option th:value="${matchInformation1.homeTeam}" th:text="${matchInformation1.homeTeam}"></option>
+                        <option th:value="${matchInformation1.guestTeam}" th:text="${matchInformation1.guestTeam}"></option>
                     </select>
                 </div>
             </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">*客队进球球员</label>
-                <div class="layui-input-inline">
-                    <div id="guest_player">
-                        <select>
-                            <option value="">请选择球员</option>
-                        </select>
-                        <select>
-                            <option value="">请选择进球数</option>
-                        </select>
-                    </div>
-                    <div id="tags"></div>
-                </div>
-                <input type="button" value="添加" onclick="addData()"/>
-            </div>
+            <input type="hidden" name="matchId" th:value="${matchInformation1.id}"/>
+            <input type="hidden" name="rleague" th:value="${matchInformation1.league}"/>
+            <input type="hidden" name="rmatchDate" th:value="${matchInformation1.matchDate}"/>
+            <input type="hidden" name="rhomeTeam" th:value="${matchInformation1.homeTeam}"/>
+            <input type="hidden" name="rguestTeam" th:value="${matchInformation1.guestTeam}"/>
+            <input style="position: absolute;left: 150px;" class="layui-btn layui-btn-normal" type="submit" value="添加结果"/>
         </form>
+
     </div>
 </div>
 

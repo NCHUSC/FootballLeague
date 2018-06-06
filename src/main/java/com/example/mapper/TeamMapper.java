@@ -37,4 +37,11 @@ public interface TeamMapper {
     @Delete("delete from team where id=#{id}")
     public int deleteTeamById(Integer id);
 
+
+    @Select("select distinct city from team")
+    public List<String> selectTeamCity();
+
+    @Select("select distinct (league) from team")
+    public List<String> selectTeamLeague();
+
 }

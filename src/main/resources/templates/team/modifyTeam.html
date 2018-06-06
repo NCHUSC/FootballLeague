@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>修改球队</title>
+    <link rel="stylesheet" href="/plugins/layui/css/layui.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/css/city-picker.css">
+</head>
+<body class="layui -layout-body">
+<div class="layui-layout layui-layout-admin layui-bg-blue">
+    <!-- 头部区域 -->
+    <div th:replace="index::topbar"></div>
+
+    <!-- 左侧导航区域 -->
+    <div th:replace="index::sidebar"></div>
+
+    <!-- 底部固定区域 -->
+    <div th:replace="index::bottombar"></div>
+
+    <!-- 内容主体区域 -->
+    <div class="layui-body">
+        <form class="layui-form" th:action="@{/modifyTeam(id=${team.id})}" method="post"> <!-- 提示：如果你不想用form，你可以换成div等任何一个普通元素 -->
+            <br>
+            <div class="layui-form-item">
+                <label class="layui-form-label">*球队全称</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="teamName" required lay-verify="required" placeholder="请输入球队全称" autocomplete="off" class="layui-input" th:value="*{team.teamName}" >
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">球队简称</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="shorterName" placeholder="请输入球队简称" class="layui-input" autocomplete="off" th:value="*{team.shorterName}">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">主场</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="home" placeholder="请输入比赛场地" class="layui-input" autocomplete="off" th:value="*{team.home}">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">队长姓名</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="captainName" placeholder="请输入队长姓名" class="layui-input" autocomplete="off" th:value="*{team.captainName}">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">队长联系方式</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="captainTel" placeholder="请输入队长联系方式" class="layui-input" autocomplete="off" th:value="*{team.captainTel}">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">所属联赛</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="league" placeholder="请输入联赛" class="layui-input" autocomplete="off" th:value="*{team.league}">
+                </div>
+            </div>
+            <!--<div class="layui-form-item">-->
+            <!--<label class="layui-form-label">所在城市</label>-->
+            <!--<div class="city-picker-selector" id="city-picker-search" ></div>-->
+            <!--</div>-->
+
+
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn layui-btn-normal" lay-submit lay-filter="*">完成</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+
+<script src="/plugins/layui/layui.js"></script>
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/citydata.min.js"></script>
+<script type="text/javascript" src="/js/cityPicker-2.0.0.js"></script>
+
+<!-- 修改密码弹窗 -->
+<script type="text/html" id="pswModel1">
+    <div id="pswModel" th:replace="index::changePsw">
+    </div>
+</script>
+
+<script>
+    //JavaScript代码区域
+    layui.use('element', function(){
+        var element = layui.element;
+
+    });
+
+    //城市选择器
+    var selector=$('#city-picker-search').cityPicker({
+        dataJson:cityData,
+        renderMode:true,
+        search:true,
+        autoSelected:true,
+        keyboard:true,
+        level:2,
+        onChoiceEnd:function () {
+            console.log(this.values)
+        }
+    });
+
+    //侧边导航栏展开并选中添加球员选项
+    $("#teamManage").addClass("layui-nav-itemed");
+    $("#addTeam").addClass("layui-this");
+
+    //显示个人信息
+    function info() {
+        layui.use(['layer'], function(){
+            var layer = layui.layer;
+            layer.open({
+                type:1,
+                title:'个人信息',
+                area:'350px',
+                offset:'120px',
+                content:'<ul style="padding:25px 35px 8px 35px;">' +
+                '<li>用户名：[[${session.loginUser}]]</li>'+
+                '<li>手机号：13657936306</li>'+
+                '</ul>',
+                btn:['确定'],
+                btnAlign:'center'
+            });
+        });
+    }
+
+    //修改密码
+    function changePassword() {
+        layui.use(['layer'],function () {
+            var layer=layui.layer;
+            layer.open({
+                type: 1,
+                title: "修改密码",
+                area: '400px',
+                offset: '120px',
+                content: $("#pswModel1").html()
+            });
+        })
+    }
+</script>
+
+</html>
+
+
+

@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>积分榜</title>
+    <title>球队信息</title>
     <link rel="stylesheet" href="/plugins/layui/css/layui.css" media="all">
     <!--<link rel="stylesheet" type="text/css" href="/plugins/bootstrap/css/bootstrap.css">-->
     <!--<link rel="stylesheet" href="//cdn.bootcss.com/zui/1.8.1/css/zui.min.css">-->
@@ -24,13 +24,14 @@
         <table class="layui-table">
             <colgroup>
                 <col width="5%">
-                <col width="15%">
                 <col width="10%">
                 <col width="10%">
-                <col width="15%">
+                <col width="10%">
+                <col width="10%">
                 <col width="10%">
                 <col width="15%">
-                <col width="20%">
+                <col width="15%">
+                <col width="15%">
             </colgroup>
             <thead>
             <tr>
@@ -42,39 +43,25 @@
                 <th>所在城市</th>
                 <th>主场</th>
                 <th>所参加联赛</th>
+                <th></th>
             </tr>
             </thead>
             <!--以下使用thymeleaf模板从数据库中遍历获取数据-->
             <tbody>
-            <tr>
-                <td>1</td>
-                <td>AC米兰</td>
-                <td>米兰</td>
-                <td></td>
-                <td></td>
-                <td>米兰</td>
-                <td>圣西罗球场</td>
-                <td>意大利足球甲级联赛</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>国际米兰</td>
-                <td>国米</td>
-                <td></td>
-                <td></td>
-                <td>米兰</td>
-                <td>梅阿查体育场</td>
-                <td>意大利足球甲级联赛</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>尤文图斯</td>
-                <td>尤文</td>
-                <td></td>
-                <td></td>
-                <td>都灵</td>
-                <td>安联体育场</td>
-                <td>意大利足球甲级联赛</td>
+            <tr th:each="tm:${teams}">
+                <td th:text="${tm.id}"></td>
+                <td th:text="${tm.teamName}"></td>
+                <td th:text="${tm.shorterName}"></td>
+                <td th:text="${tm.captainName}"></td>
+                <td th:text="${tm.captainTel}"></td>
+                <td th:text="${tm.city}"></td>
+                <td th:text="${tm.home}"></td>
+                <td th:text="${tm.league}"></td>
+                <td>
+                    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail" th:href="@{displayTeam(id=${tm.id})}">查看</a>
+                    <a class="layui-btn layui-btn-xs" lay-event="edit" th:href="@{toModifyTeam(id=${tm.id})}">修改</a>
+                    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"  th:href="@{deleteTeam(id=${tm.id})}" >删除</a>
+                </td>
             </tr>
             </tbody>
         </table>

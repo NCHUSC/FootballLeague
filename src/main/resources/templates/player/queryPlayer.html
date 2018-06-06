@@ -24,7 +24,6 @@
         <div class="layui-tab layui-tab-brief" lay-filter="condition">
             <label class="layui-form-label" style="font-size: large">查询条件</label>
             <ul class="layui-tab-title">
-                <li>根据id查询</li>
                 <li class="layui-this">根据姓名查询</li>
                 <li>根据球队查询</li>
                 <li>根据场上位置查询</li>
@@ -34,34 +33,33 @@
                 <li>根据体重查询</li>
             </ul>
             <div class="layui-tab-content">
-                <!-- 根据id查询 -->
-                <div class="layui-tab-item">
-                    <div class="layui-form-item" style="margin: 100px auto;width: 800px">
-                        <div class="layui-input-block" style="width: 35%;display: inline-block">
-                            <input type="text" name="title" required  lay-verify="required" placeholder="请输入球员id" autocomplete="off" class="layui-input">
-                        </div>
-                        <button style="display: inline-block" class="layui-btn layui-btn-normal">搜索</button>
-                    </div>
-                </div>
                 <!-- 根据球员姓名查询 -->
                 <div class="layui-tab-item layui-show">
                     <div class="layui-form-item" style="margin: 100px auto;width: 800px">
-                        <div class="layui-input-block" style="width: 35%;display: inline-block">
-                            <input type="text" name="title" required  lay-verify="required" placeholder="请输入球员姓名" autocomplete="off" class="layui-input">
-                        </div>
-                        <a href="#" th:href="@{showPlayer}"><button style="display: inline-block" class="layui-btn layui-btn-normal">搜索</button></a>
+                        <form th:action="@{/player_select}" method="post">
+                            <div class="layui-input-block" style="width: 35%;display: inline-block">
+                                <input type="text" name="name" required  lay-verify="required" placeholder="请输入球员姓名" autocomplete="off" class="layui-input">
+                            </div>
+                            <button style="display: inline-block" class="layui-btn layui-btn-normal">搜索</button>
+                        </form>
                     </div>
                 </div>
                 <!-- 根据所属球队查询 -->
                 <div class="layui-tab-item">
                     <div class="layui-form">
                         <div class="layui-form-item" style="margin: 100px auto;width: 800px">
-                            <div class="layui-input-block" style="width: 35%;display: inline-block">
-                                <select name="league" lay-verify="required">
-                                    <option value="">请选择所属球队</option>
-                                </select>
-                            </div>
-                            <button style="display: inline-block" class="layui-btn layui-btn-normal">搜索</button>
+                            <form th:action="@{/player_select}" method="post">
+                                <div class="layui-input-block" style="width: 35%;display: inline-block">
+                                    <select name="team" lay-verify="required">
+                                        <option value="">请选择所属球队</option>
+                                        <options th:each="team:${teams}">
+                                            <option th:value="${team.teamName}" th:text="${team.teamName}">
+                                            </option>
+                                        </options>
+                                    </select>
+                                </div>
+                                <button style="display: inline-block" class="layui-btn layui-btn-normal">搜索</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -69,74 +67,84 @@
                 <div class="layui-tab-item">
                     <div class="layui-form">
                         <div class="layui-form-item" style="margin: 100px auto;width: 800px">
-                            <div class="layui-input-block" style="width: 35%;display: inline-block">
-                                <select name="position" lay-verify="required">
-                                    <option value="">请选择场上位置</option>
-                                    <option value="0">前锋</option>
-                                    <option value="1">中场</option>
-                                    <option value="2">后卫</option>
-                                    <option value="3">守门员</option>
-                                </select>
-                            </div>
-                            <button style="display: inline-block" class="layui-btn layui-btn-normal">搜索</button>
+                            <form th:action="@{/player_select}" method="post">
+                                <div class="layui-input-block" style="width: 35%;display: inline-block">
+                                    <select name="position" lay-verify="required">
+                                        <option value="">请选择场上位置</option>
+                                        <option value="前锋">前锋</option>
+                                        <option value="中场">中场</option>
+                                        <option value="后卫">后卫</option>
+                                        <option value="守门员">守门员</option>
+                                    </select>
+                                </div>
+                                <button style="display: inline-block" class="layui-btn layui-btn-normal">搜索</button>
+                            </form>
                         </div>
                     </div>
                 </div>
                 <!-- 根据球衣号码查询 -->
                 <div class="layui-tab-item">
                     <div class="layui-form-item" style="margin: 100px auto;width: 800px">
-                        <div class="layui-input-block" style="width: 35%;display: inline-block">
-                            <input type="text" name="title" required  lay-verify="required" placeholder="请输入球衣号码(0-99)" autocomplete="off" class="layui-input">
-                        </div>
-                        <button style="display: inline-block" class="layui-btn layui-btn-normal">搜索</button>
+                        <form th:action="@{/player_select}" method="post">
+                            <div class="layui-input-block" style="width: 35%;display: inline-block">
+                                <input type="text" name="number" required  lay-verify="required" placeholder="请输入球衣号码(0-99)" autocomplete="off" class="layui-input">
+                            </div>
+                            <button style="display: inline-block" class="layui-btn layui-btn-normal">搜索</button>
+                        </form>
                     </div>
                 </div>
                 <!-- 根据球员年龄查询 -->
                 <div class="layui-tab-item">
                     <div class="layui-form-item" style="margin: 100px auto;width: 800px">
-                        <div class="layui-inline" style="margin-right: 10px">
-                            <label class="layui-form-label">年龄范围</label>
-                            <div class="layui-input-inline" style="width: 120px;">
-                                <input type="text" name="price_min" placeholder="岁" autocomplete="off" class="layui-input">
+                        <form th:action="@{/player_select}" method="post">
+                            <div class="layui-inline" style="margin-right: 10px">
+                                <label class="layui-form-label">年龄范围</label>
+                                <div class="layui-input-inline" style="width: 120px;">
+                                    <input type="text" name="minAge" placeholder="岁" autocomplete="off" class="layui-input">
+                                </div>
+                                <div class="layui-form-mid">-</div>
+                                <div class="layui-input-inline" style="width: 120px;">
+                                    <input type="text" name="maxAge" placeholder="岁" autocomplete="off" class="layui-input">
+                                </div>
                             </div>
-                            <div class="layui-form-mid">-</div>
-                            <div class="layui-input-inline" style="width: 120px;">
-                                <input type="text" name="price_max" placeholder="岁" autocomplete="off" class="layui-input">
-                            </div>
-                        </div>
-                        <button class="layui-btn layui-btn-normal">搜索</button>
+                            <button class="layui-btn layui-btn-normal">搜索</button>
+                        </form>
                     </div>
                 </div>
                 <!-- 根据球员身高查询 -->
                 <div class="layui-tab-item">
                     <div class="layui-form-item" style="margin: 100px auto;width: 800px">
-                        <div class="layui-inline" style="margin-right: 10px">
-                            <label class="layui-form-label">身高范围</label>
-                            <div class="layui-input-inline" style="width: 120px;">
-                                <input type="text" name="price_min" placeholder="cm" autocomplete="off" class="layui-input">
+                        <form th:action="@{/player_select}" method="post">
+                            <div class="layui-inline" style="margin-right: 10px">
+                                <label class="layui-form-label">身高范围</label>
+                                <div class="layui-input-inline" style="width: 120px;">
+                                    <input type="text" name="minHeight" placeholder="cm" autocomplete="off" class="layui-input">
+                                </div>
+                                <div class="layui-form-mid">-</div>
+                                <div class="layui-input-inline" style="width: 120px;">
+                                    <input type="text" name="maxHeight" placeholder="cm" autocomplete="off" class="layui-input">
+                                </div>
                             </div>
-                            <div class="layui-form-mid">-</div>
-                            <div class="layui-input-inline" style="width: 120px;">
-                                <input type="text" name="price_max" placeholder="cm" autocomplete="off" class="layui-input">
-                            </div>
-                        </div>
-                        <button class="layui-btn layui-btn-normal">搜索</button>
+                            <button class="layui-btn layui-btn-normal">搜索</button>
+                        </form>
                     </div>
                 </div>
                 <!-- 根据球员体重查询 -->
                 <div class="layui-tab-item">
                     <div class="layui-form-item" style="margin: 100px auto;width: 800px">
-                        <div class="layui-inline" style="margin-right: 10px">
-                            <label class="layui-form-label">体重范围</label>
-                            <div class="layui-input-inline" style="width: 120px;">
-                                <input type="text" name="price_min" placeholder="kg" autocomplete="off" class="layui-input">
+                        <form th:action="@{/player_select}" method="post">
+                            <div class="layui-inline" style="margin-right: 10px">
+                                <label class="layui-form-label">体重范围</label>
+                                <div class="layui-input-inline" style="width: 120px;">
+                                    <input type="text" name="minWeight" placeholder="kg" autocomplete="off" class="layui-input">
+                                </div>
+                                <div class="layui-form-mid">-</div>
+                                <div class="layui-input-inline" style="width: 120px;">
+                                    <input type="text" name="maxWeight" placeholder="kg" autocomplete="off" class="layui-input">
+                                </div>
                             </div>
-                            <div class="layui-form-mid">-</div>
-                            <div class="layui-input-inline" style="width: 120px;">
-                                <input type="text" name="price_max" placeholder="kg" autocomplete="off" class="layui-input">
-                            </div>
-                        </div>
-                        <button class="layui-btn layui-btn-normal">搜索</button>
+                            <button class="layui-btn layui-btn-normal">搜索</button>
+                        </form>
                     </div>
                 </div>
             </div>

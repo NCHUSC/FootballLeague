@@ -23,56 +23,60 @@
 
     <!-- 内容主体区域 -->
     <div class="layui-body">
-        <form class="layui-form">
+        <form class="layui-form" th:action="@{/player_add}" method="post">
             <br>
             <div class="layui-form-item">
                 <label class="layui-form-label">*球员姓名</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="" required lay-verify="required" placeholder="请输入球员姓名" autocomplete="off" class="layui-input">
+                    <input type="text" name="name" required lay-verify="required" placeholder="请输入球员姓名" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">*球员号码</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="" placeholder="请输入球员号码(0-99)" class="layui-input" autocomplete="off">
+                    <input type="text" name="number" placeholder="请输入球员号码(0-99)" class="layui-input" autocomplete="off">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">*所加入的球队</label>
                 <div class="layui-input-inline">
-                    <select>
+                    <select name="team">
                         <option value="">请选择加入的球队</option>
+                        <options th:each="team:${teams}">
+                            <option th:value="${team.teamName}" th:text="${team.teamName}">
+                            </option>
+                        </options>
                     </select>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">场上位置</label>
                 <div class="layui-input-inline">
-                    <select>
+                    <select name="position">
                         <option value="">请选择场上位置</option>
-                        <option value="0">前锋</option>
-                        <option value="1">中场</option>
-                        <option value="2">后卫</option>
-                        <option value="3">守门员</option>
+                        <option value="前锋">前锋</option>
+                        <option value="中场">中场</option>
+                        <option value="后卫">后卫</option>
+                        <option value="守门员">守门员</option>
                     </select>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">年龄</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="" placeholder="请输入年龄(1-99)" class="layui-input" autocomplete="off">
+                    <input type="text" name="age" placeholder="请输入年龄(1-99)" class="layui-input" autocomplete="off">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">身高</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="" placeholder="请输入身高(cm)" class="layui-input" autocomplete="off">
+                    <input type="text" name="height" placeholder="请输入身高(cm)" class="layui-input" autocomplete="off">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">体重</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="" placeholder="请输入体重(kg)" class="layui-input" autocomplete="off">
+                    <input type="text" name="weight" placeholder="请输入体重(kg)" class="layui-input" autocomplete="off">
                 </div>
             </div>
             <div class="layui-form-item">

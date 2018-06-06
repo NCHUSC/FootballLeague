@@ -91,47 +91,35 @@
                         <tr>
                             <th>ID</th>
                             <th>比赛状态</th>
-                            <th>比赛结果</th>
+                            <th>比赛双方</th>
                             <th>比赛轮次</th>
                             <th>比赛日期</th>
                             <th>裁判</th>
                             <th>比赛场地</th>
                             <th>比赛城市</th>
+                            <th></th>
                         </tr>
                         </thead>
                         <!--以下使用thymeleaf模板从数据库中遍历获取数据-->
                         <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td><span class="status1">未开始</span></td>
+                        <tr th:each="matchInformation:${matchInformations}">
+                            <td th:text="${matchInformation.id}"></td>
+                            <td th:text="${matchInformation.state}"></td>
                             <td>
-                                <span class="guest_team">骑士</span>
+                                <span class="guest_team" th:text="${matchInformation.guestTeam}"></span>
                                 <span class="logo"></span>
                                 <span class="score"> VS </span>
                                 <span class="logo"></span>
-                                <span class="home_team">热火</span>
+                                <span class="home_team" th:text="${matchInformation.homeTeam}"></span>
                             </td>
-                            <td>第1轮</td>
-                            <td>2018-05-18</td>
-                            <td>景琪琛</td>
-                            <td>美航球馆</td>
-                            <td>迈阿密</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td><span class="status2">已结束</span></td>
+                            <td th:text="${matchInformation.round}"></td>
+                            <td th:text="${matchInformation.matchDate}"></td>
+                            <td th:text="${matchInformation.referee}"></td>
+                            <td th:text="${matchInformation.field}"></td>
+                            <td th:text="${matchInformation.city}"></td>
                             <td>
-                                <span class="guest_team">骑士</span>
-                                <span class="logo"></span>
-                                <span class="score"> 112-114 </span>
-                                <span class="logo"></span>
-                                <span class="home_team">热火</span>
+                                <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail" th:href="@{displayMatchInformation(id=${matchInformation.id})}">查看</a>
                             </td>
-                            <td>第1轮</td>
-                            <td>2018-05-11</td>
-                            <td>景琪琛</td>
-                            <td>美航球馆</td>
-                            <td>迈阿密</td>
                         </tr>
                         </tbody>
                     </table>
@@ -141,66 +129,25 @@
                     <!--时间线模块-->
                     <ul class="layui-timeline">
                         <!--每个时间线-->
-                        <li class="layui-timeline-item">
+                        <li class="layui-timeline-item" th:each="matchInformation:${matchInformations}">
                             <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
                             <div class="layui-timeline-content layui-text">
-                                <h3 class="layui-timeline-title">5月12号</h3>
+                                <h3 class="layui-timeline-title" th:text="${matchInformation.matchDate}"></h3>
                                 <p>
                                     <tr>
-                                        <td><span class="status1">未开始</span></td>
+                                        <td><span class="status1" th:text="${matchInformation.state}"></span></td>
                                         <td class="content">
-                                            <span class="guest_team">骑士</span>
+                                            <span class="guest_team" th:text="${matchInformation.guestTeam}"></span>
                                             <span class="logo"></span>
                                             <span class="score"> VS </span>
                                             <span class="logo"></span>
-                                            <span class="home_team">热火</span>
+                                            <span class="home_team" th:text="${matchInformation.homeTeam}"></span>
                                         </td>
                                     </tr>
                                 </p>
                             </div>
                         </li>
-                        <!--每个时间线-->
-                        <li class="layui-timeline-item">
-                            <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
-                            <div class="layui-timeline-content layui-text">
-                                <h3 class="layui-timeline-title">5月11号</h3>
-                                <p>
-                                    <tr>
-                                        <td><span class="status2">已结束</span></td>
-                                        <td class="content">
-                                            <span class="guest_team">骑士</span>
-                                            <span class="logo"></span>
-                                            <span class="score"> 112-114 </span>
-                                            <span class="logo"></span>
-                                            <span class="home_team">热火</span>
-                                        </td>
-                                    </tr>
-                                </p>
-                            </div>
-                        </li>
-                        <!--每个时间线-->
-                        <li class="layui-timeline-item">
-                            <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
-                            <div class="layui-timeline-content layui-text">
-                                <h3 class="layui-timeline-title">5月10号</h3>
-                                <p>
-                                    <tr>
-                                        <td><span class="status2">已结束</span></td>
-                                        <td class="content">
-                                            <span class="guest_team">76人</span>
-                                            <span class="logo"></span>
-                                            <span class="score"> 112-114 </span>
-                                            <span class="logo"></span>
-                                            <span class="home_team">凯尔特人</span>
-                                        </td>
-                                    </tr>
-                                </p>
-                            </div>
-                        </li>
-                        <!--每个时间线-->
-                        <li class="layui-timeline-item">
 
-                        </li>
                     </ul>
                 </div>
             </div>
