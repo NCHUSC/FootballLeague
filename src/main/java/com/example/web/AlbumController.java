@@ -4,6 +4,7 @@ import com.example.model.League;
 import com.example.model.Photo;
 import com.example.repository.LeagueRepository;
 import com.example.repository.PhotoRepository;
+import com.example.service.PhotoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,6 +28,9 @@ public class AlbumController {
     @Autowired
     private PhotoRepository photoRepository;
 
+    @Autowired
+    private PhotoService photoService;
+
     /**
      * 从数据库中获取所有图片
      * @return
@@ -46,7 +50,7 @@ public class AlbumController {
      */
     public List<Photo> photos(int leagueID){
         List<Photo> photos=new ArrayList<>();
-        for(Photo photo:photoRepository.findByLeagueID(leagueID)){
+        for(Photo photo:photoService.getPhotoByLeagueID(leagueID)){
             photos.add(photo);
         }
         return photos;
