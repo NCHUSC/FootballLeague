@@ -84,15 +84,11 @@ public class AlbumController {
     @GetMapping("/showPhoto")
     public ModelAndView toShowPhotoPage(int league_id,Model model /*HttpServletRequest request*/){
         League league=leagueRepository.getOne(league_id);
-        /*String fileName=request.getSession().getAttribute("fileName").toString();*/
-        /*System.out.println("文件名称啊啊啊:"+fileName);*/
         model.addAttribute("league",league);
-        /*Photo photo=photoRepository.findByFileName(fileName);*/
         List<Photo> photos=photoRepository.findByLeagueID(league_id);
         model.addAttribute("photo",photos);
         model.addAttribute("photoList",photos(league_id));
         return new ModelAndView("album/showPhoto","photoModel",model);
-        /*return "album/showPhoto";*/
     }
 
     //上传照片

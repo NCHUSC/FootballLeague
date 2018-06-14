@@ -79,38 +79,6 @@ public class UserController {
     }
 
 
-
-
-
-
-
-
-
-
-    /**
-     * 增加
-     * 添加一个用户
-     *
-     * @param account
-     * @param password
-     * @param nickname
-     * @param tel
-     * @return
-     */
-    /*@PostMapping(value = "/user")
-    public User addUser(@RequestParam(value = "account", required = true) String account,
-                        @RequestParam(value = "password", required = true) String password,
-                        @RequestParam(value = "nickname", required = true) String nickname,
-                        @RequestParam(value = "tel", required = true) String tel) {
-        User user = new User();
-        user.setAccount(account);
-        user.setPassword(password);
-        user.setNickname(nickname);
-        user.setTel(tel);
-
-        return userRepository.save(user);
-    }*/
-
     /**
      * 查询
      * 查询所有用户列表

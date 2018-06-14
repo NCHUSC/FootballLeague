@@ -1,19 +1,47 @@
 package com.example.model;
 
 public class Player {
+
+    //球员id
     private Integer id;
+
+    //球员姓名
     private String name;
+
+    //所属球队
     private String team;
+
+    //球衣号码
     private Integer number;
+
+    //场上位置
     private String position;
+
+    //身高
     private String height;
+
+    //身高范围（小）
     private String minHeight;
+
+    //身高范围（大）
     private String maxHeight;
+
+    //体重
     private String weight;
+
+    //体重范围（小）
     private String minWeight;
+
+    //体重范围（大）
     private String maxWeight;
+
+    //年龄
     private Integer age;
+
+    //年龄范围（小）
     private Integer minAge;
+
+    //年龄范围（大）
     private Integer maxAge;
 
     public String getMinHeight() {

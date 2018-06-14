@@ -74,25 +74,6 @@ public class LeagueController {
         /*return "redirect:/leagueDetail";*/
     }
 
-    //跳转至添加赛制详情页面
-    /*@GetMapping("/leagueDetail")
-    public String toDetailPage(Model model){
-        return "league/addLeagueDetails";
-    }*/
-    /*public String toDetailPage(int league_id,Model model){
-        League league=leagueRepository.getOne(league_id);
-        System.out.println(league_id);
-        model.addAttribute("league",league);
-        return "league/addLeagueDetails";
-    }*/
-
-    //添加赛制详情
-    /*@PostMapping("/addLeagueDatail")
-    public String addLeagueDetails(League league){
-        leagueRepository.save(league);
-        return "redirect:/leagues";
-    }*/
-
     //跳转至查询赛事信息页面
     @GetMapping("/queryLeague")
     public ModelAndView toQueryPage(Model model){
@@ -317,11 +298,7 @@ public class LeagueController {
             }
 
             List<MatchInformation> matchInformations=matchInformationService.getMatchInformationByLeague(leagueName);
-            /*for(MatchInformation matchInformation_:matchInformations){
-                System.out.println("id："+matchInformation_.getId());
-            }*/
             model.addAttribute("matchInformations",matchInformations);
-
 
             return "league/autoMatchResult";
         }
@@ -351,17 +328,4 @@ public class LeagueController {
         model.addAttribute("leagueList",leagueList());
         return new ModelAndView("album/albums","leagueModel",model);
     }
-
-    //跳转至查询结果页面
-    /*@GetMapping("/showLeague/{league_id}")*/
-    /*public String toShowPage(@PathVariable("league_id") int league_id,Model model){
-        League league=leagueRepository.getOne(league_id);
-        model.addAttribute("league",league);
-        return "league/showLeague";
-    }*/
-    /*public ModelAndView toShowPage(@PathVariable("league_id") int league_id,Model model){
-        League league=leagueRepository.getOne(league_id);
-        model.addAttribute("league",league);
-        return new ModelAndView("league/showLeague","leagueModel",model);
-    }*/
 }

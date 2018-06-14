@@ -38,15 +38,6 @@ public class PlayerController {
         return "player/shooterboard";
     }
 
-    /*
-    //跳转到添加球员界面
-    @GetMapping("/player")
-    public String toAddPage(Model model){
-        List<Team> teamList=teamRepository.findAll();
-        model.addAttribute("teams",teamList);
-        return "player/addPlayer";
-    }*/
-
 
 }
 

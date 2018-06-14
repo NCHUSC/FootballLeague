@@ -2,15 +2,34 @@ package com.example.model;
 
 public class MatchResult {
 
+    //比赛结果id
     private Integer rid;
+
+    //所属联赛
     private String rleague;
+
+    //比赛日期
     private String rmatchDate;
+
+    //主队
     private String rhomeTeam;
+
+    //客队
     private String rguestTeam;
+
+    //比赛获胜方
     private String winner;
+
+    //比分
     private String score;
+
+    //主队进球数
     private Integer homeGoals;
+
+    //客队进球数
     private Integer guestGoals;
+
+    //所属比赛
     private Integer matchId;
 
     public Integer getMatchId() {

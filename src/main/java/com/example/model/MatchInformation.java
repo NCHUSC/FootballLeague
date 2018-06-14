@@ -1,26 +1,38 @@
 package com.example.model;
 
 public class MatchInformation {
+
+    //比赛信息id
     private int id;
 
+    //所属联赛
     private String league;
 
+    //所属轮次
     private String round;
 
+    //比赛日期
     private String matchDate;
 
+    //主队
     private String homeTeam;
 
+    //客队
     private String guestTeam;
 
+    //裁判
     private String referee;
 
+    //比赛城市
     private String city;
 
+    //比赛场地
     private String field;
 
+    //球队
     private String team;
 
+    //比赛状态
     private String state;
 
     public String getState() {

@@ -4,9 +4,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>上传照片</title>
     <link rel="stylesheet" href="/plugins/layui/css/layui.css" media="all">
-    <!--<link rel="stylesheet" href="/plugins/zui/lib/uploader/zui.uploader.min.css">-->
-    <!--<link rel="stylesheet" type="text/css" href="/plugins/bootstrap/css/bootstrap.css">-->
-    <!--<link rel="stylesheet" href="//cdn.bootcss.com/zui/1.8.1/css/zui.min.css">-->
 </head>
 
 <body class="layui-layout-body">
@@ -22,12 +19,6 @@
 
     <!-- 内容主体区域 -->
     <div class="layui-body">
-
-        <!--ZUI上传图片-->
-        <!--<div id="uploaderExample" class="uploader">
-            <div class="file-list" data-drag-placeholder="请拖拽文件到此处"></div>
-            <button type="button" class="btn btn-primary uploader-btn-browse"><i class="icon icon-cloud-upload"></i>选择文件</button>
-        </div>-->
 
         <!--layui上传图片-->
         <!--普通图片上传-->
@@ -88,7 +79,6 @@
 
 </body>
 
-<!--<script src="/plugins/zui/lib/uploader/zui.uploader.min.js"></script>-->
 <script src="/plugins/layui/layui.js"></script>
 <script type="text/javascript" src="/js/jquery.js"></script>
 
@@ -104,13 +94,6 @@
         var element = layui.element;
 
     });
-
-
-    //ZUI上传图片
-    /*$('#uploaderExample').uploader({
-        autoUpload: true,            // 当选择文件后立即自动进行上传操作
-        url: '/images'  // 文件上传提交地址
-    });*/
 
     //layui上传图片
     layui.use('upload',function () {
