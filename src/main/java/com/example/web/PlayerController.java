@@ -39,6 +39,11 @@ public class PlayerController {
     }
 
 
+    //点击退出跳转至登录界面
+    @GetMapping("/logout")
+    public String toLogin(){
+        return "login";
+    }
 }
 
 

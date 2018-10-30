@@ -78,18 +78,6 @@ public class UserController {
         return "login";
     }
 
-
-    /**
-     * 查询
-     * 查询所有用户列表
-     *
-     * @return
-     */
-    /*@GetMapping(value = "users")
-    public List<User> userList() {
-        return userRepository.findAll();
-    }*/
-
     /**
      * 查询
      * 根据id查询

@@ -40,7 +40,7 @@
                     <dd><a href="#" onclick="changePassword()"><i class="layui-icon">&#xe631;</i>&nbsp;修改密码</a></dd>
                 </dl>
             </li>
-            <li class="layui-nav-item"><a href="">退出</a></li>
+            <li class="layui-nav-item"><a href="#" th:href="@{logout}">退出</a></li>
         </ul>
     </div>
 
@@ -84,9 +84,19 @@
         </div>
     </div>
 
-    <!-- 内容主体区域 -->
+    <!-- 内容主体区域 -->¬¬¬
     <div class="layui-body">
-
+        <div class="layui-carousel" style="margin: 200px auto" id="test10">
+            <div carousel-item="">
+                <div><img src="logo.png"></div>
+                <div><img src="logo.png"></div>
+                <div><img src="logo.png"></div>
+                <div><img src="logo.png"></div>
+                <div><img src="https://res.layui.com/images/layui/demo/5.png"></div>
+                <div><img src="https://res.layui.com/images/layui/demo/6.png"></div>
+                <div><img src="https://res.layui.com/images/layui/demo/7.png"></div>
+            </div>
+        </div>
     </div>
 
     <!-- 底部固定区域 -->
@@ -107,24 +117,28 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">旧密码</label>
                 <div class="layui-input-block">
-                    <input name="password" style="width:80%;" placeholder="请输入旧密码" type="password" class="layui-input" maxlength="12" lay-verify="required|pass" required />
+                    <input name="password" style="width:80%;" placeholder="请输入旧密码" type="password" class="layui-input"
+                           maxlength="12" lay-verify="required|pass" required/>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">新密码</label>
                 <div class="layui-input-block">
-                    <input name="newPsw" style="width:80%" placeholder="请输入新密码" type="password" class="layui-input" maxlength="12" lay-verify="required|pass" required />
+                    <input name="newPsw" style="width:80%" placeholder="请输入新密码" type="password" class="layui-input"
+                           maxlength="12" lay-verify="required|pass" required/>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">确认密码</label>
                 <div class="layui-input-block">
-                    <input name="renewPsw" style="width:80%" placeholder="请再次输入新密码" type="password" class="layui-input" maxlength="12" lay-verify="required|psw2" required />
+                    <input name="renewPsw" style="width:80%" placeholder="请再次输入新密码" type="password" class="layui-input"
+                           maxlength="12" lay-verify="required|psw2" required/>
                 </div>
             </div>
             <div class="layui-form-item">
                 <div class="layui-input-block">
-                    <button type="submit" class="layui-btn layui-btn-normal" lay-filter="pswSubmit" lay-submit>修改</button>
+                    <button type="submit" class="layui-btn layui-btn-normal" lay-filter="pswSubmit" lay-submit>修改
+                    </button>
                     <button class="layui-btn layui-btn-primary" type="button" id="pswCancel">取消</button>
                 </div>
             </div>
@@ -134,12 +148,25 @@
 
 <script>
     //JavaScript代码区域
-    layui.use('element', function(){
+    layui.use('element', function () {
         var element = layui.element;
 
-        element.on('nav(sidebar)', function(elem){
+        element.on('nav(sidebar)', function (elem) {
             console.log("点击");
             console.log(elem);
+        });
+    });
+
+    layui.use(['carousel', 'form'], function () {
+        var carousel = layui.carousel,
+            form = layui.form;
+
+        //图片轮播
+        carousel.render({
+            elem: '#test10'
+            , width: '778px'
+            , height: '440px'
+            , interval: 5000
         });
     });
 
@@ -156,27 +183,27 @@
 
     //显示个人信息
     function info() {
-        layui.use(['layer'], function(){
+        layui.use(['layer'], function () {
             var layer = layui.layer;
             layer.open({
-                type:1,
-                title:'个人信息',
-                area:'350px',
-                offset:'120px',
-                content:'<ul style="padding:25px 35px 8px 35px;">' +
-                '<li>用户名：[[${session.loginUser}]]</li>'+
-                '<li>联系方式：[[${session.tel}]]</li>'+
+                type: 1,
+                title: '个人信息',
+                area: '350px',
+                offset: '120px',
+                content: '<ul style="padding:25px 35px 8px 35px;">' +
+                '<li>用户名：[[${session.loginUser}]]</li>' +
+                '<li>联系方式：[[${session.tel}]]</li>' +
                 '</ul>',
-                btn:['确定'],
-                btnAlign:'center'
+                btn: ['确定'],
+                btnAlign: 'center'
             });
         });
     }
 
     //修改密码
     function changePassword() {
-        layui.use(['layer'],function () {
-            var layer=layui.layer;
+        layui.use(['layer'], function () {
+            var layer = layui.layer;
             layer.open({
                 type: 1,
                 title: "修改密码",
@@ -186,6 +213,8 @@
             });
         })
     }
+
+
 </script>
 
 <!--<script>
