@@ -10,81 +10,139 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
-public class LeagueServiceImpl implements LeagueService{
+public class LeagueServiceImpl implements LeagueService {
 
     @Autowired
     private LeagueRepository leagueRepository;
 
-    //保存联赛
+    /**
+     * 保存联赛
+     *
+     * @param league
+     * @return
+     */
     @Transactional
     @Override
     public League saveLeague(League league) {
         return leagueRepository.save(league);
     }
 
-    //删除联赛
+    /**
+     * 删除联赛
+     *
+     * @param league_id
+     */
     @Transactional
     @Override
     public void deleteLeague(int league_id) {
         leagueRepository.deleteById(league_id);
     }
 
-    //修改联赛
+    /**
+     * 修改联赛
+     *
+     * @param league
+     * @return
+     */
     @Transactional
     @Override
     public League modifyLeague(League league) {
         return leagueRepository.save(league);
     }
 
-    //通过id获取联赛
+    /**
+     * 通过 id 获取联赛
+     *
+     * @param league_id
+     * @return
+     */
     @Override
     public League getLeaugeById(int league_id) {
         return leagueRepository.getOne(league_id);
     }
 
-    //通过联赛名称获取联赛
+    /**
+     * 通过联赛名称获取联赛
+     *
+     * @param leagueName
+     * @return
+     */
     @Override
     public League getLeagueByName(String leagueName) {
         return leagueRepository.findByLeagueName(leagueName);
     }
 
-    //通过联赛名称模糊查询获取联赛
+    /**
+     * 通过联赛名称模糊查询获取联赛
+     *
+     * @param leagueName
+     * @return
+     */
     @Override
     public List<League> getLeagueByNameLike(String leagueName) {
         return leagueRepository.findByLeagueNameContaining(leagueName);
     }
 
-    //通过联赛简称获取联赛
+    /**
+     * 通过联赛简称获取联赛
+     *
+     * @param shorterName
+     * @return
+     */
     @Override
     public League getLeagueByShorterName(String shorterName) {
         return leagueRepository.findByShorterName(shorterName);
     }
 
-    //通过联赛简称模糊查询获取联赛
+    /**
+     * 通过联赛简称模糊查询获取联赛
+     *
+     * @param shorterName
+     * @return
+     */
     @Override
     public List<League> getLeagueByShorterNameLike(String shorterName) {
         return leagueRepository.findByShorterNameContaining(shorterName);
     }
 
-    //通过开始日期获取联赛
+    /**
+     * 通过开始日期获取联赛
+     *
+     * @param startDate
+     * @return
+     */
     @Override
     public List<League> getLeagueByStartDate(String startDate) {
         return leagueRepository.findByStartDate(startDate);
     }
 
-    //通过主办方获取联赛
+    /**
+     * 通过主办方获取联赛
+     *
+     * @param sponsor
+     * @return
+     */
     @Override
     public List<League> getLeagueBySponsor(String sponsor) {
         return leagueRepository.findBySponsor(sponsor);
     }
 
-    //通过主办方模糊查询获取联赛
+    /**
+     * 通过主办方模糊查询获取联赛
+     *
+     * @param sponsor
+     * @return
+     */
     @Override
     public List<League> getLeagueBySponsorLike(String sponsor) {
         return leagueRepository.findBySponsorContaining(sponsor);
     }
 
-    //获取所有联赛列表
+    /**
+     * 获取所有联赛列表
+     *
+     * @return
+     */
     @Override
     public List<League> leagueList() {
         return leagueRepository.findAllOrderById();

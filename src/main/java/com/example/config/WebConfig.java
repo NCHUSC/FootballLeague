@@ -17,28 +17,34 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         super.addResourceHandlers(registry);
     }*/
 
-
-    //所有的WebMvcConfigurerAdapter组件会一起起作用
-    //将组件注册在容器
+    /**
+     * 所有的WebMvcConfigurerAdapter组件会一起起作用
+     * 将组件注册在容器
+     *
+     * @return
+     */
     @Bean
-    public WebMvcConfigurerAdapter webMvcConfigurerAdapter(){
-        WebMvcConfigurerAdapter adapter=new WebMvcConfigurerAdapter() {
+    public WebMvcConfigurerAdapter webMvcConfigurerAdapter() {
+        WebMvcConfigurerAdapter adapter = new WebMvcConfigurerAdapter() {
 
             @Override
-            public void addViewControllers(ViewControllerRegistry registry){
+            public void addViewControllers(ViewControllerRegistry registry) {
                 registry.addViewController("/").setViewName("login");
                 registry.addViewController("/login.html").setViewName("login");
                 registry.addViewController("/index.html").setViewName("index");
             }
 
-            /*//注册拦截器
+            /**
+             * 注册拦截器
+             * @param registry
+             */
             @Override
             public void addInterceptors(InterceptorRegistry registry){
-                //super.addInterceptors(registry);
-                //Springboot做好了静态资源映射，不需要排除静态资源
+                // super.addInterceptors(registry);
+                // Springboot 做好了静态资源映射，不需要排除静态资源
                 registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/**")
                         .excludePathPatterns("/login.html","/","/login");
-            }*/
+            }
         };
         return adapter;
     }

@@ -1,47 +1,78 @@
 package com.example.model;
 
+/**
+ * 球员实体类
+ */
 public class Player {
 
-    //球员id
+    /**
+     * 球员 id
+     */
     private Integer id;
 
-    //球员姓名
+    /**
+     * 球员姓名
+     */
     private String name;
 
-    //所属球队
+    /**
+     * 所属球队
+     */
     private String team;
 
-    //球衣号码
+    /**
+     * 球衣号码
+     */
     private Integer number;
 
-    //场上位置
+    /**
+     * 场上位置
+     */
     private String position;
 
-    //身高
+    /**
+     * 身高
+     */
     private String height;
 
-    //身高范围（小）
+    /**
+     * 身高范围（小）
+     */
     private String minHeight;
 
-    //身高范围（大）
+    /**
+     * 身高范围（大）
+     */
     private String maxHeight;
 
-    //体重
+    /**
+     * 体重
+     */
     private String weight;
 
-    //体重范围（小）
+    /**
+     * 体重范围（小）
+     */
     private String minWeight;
 
-    //体重范围（大）
+    /**
+     * 体重范围（大）
+     */
     private String maxWeight;
 
-    //年龄
+    /**
+     * 年龄
+     */
     private Integer age;
 
-    //年龄范围（小）
+    /**
+     * 年龄范围（小）
+     */
     private Integer minAge;
 
-    //年龄范围（大）
+    /**
+     * 年龄范围（大）
+     */
     private Integer maxAge;
 
     public String getMinHeight() {

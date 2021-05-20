@@ -20,41 +20,63 @@ public class MatchResultController {
     @Autowired
     PlayerService playerService;
 
-    //跳转至比赛信息页面
+    /**
+     * 跳转至比赛信息页面
+     *
+     * @param model
+     * @return
+     */
     @GetMapping("/matchResult")
-    public String toMatchNewsPage(Model model){
+    public String toMatchNewsPage(Model model) {
         Collection<MatchInformation> matchInformations = matchNewsService.selectAllMatchNews();
-        model.addAttribute("matchInformations",matchInformations);
+        model.addAttribute("matchInformations", matchInformations);
         return "match/showMatchInformation";
     }
 
-    //跳转至添加比赛结果页面
+    /**
+     * 跳转至添加比赛结果页面
+     *
+     * @param matchInformation
+     * @param model
+     * @return
+     */
     @PostMapping("/addMatchResultPage")
-    public String toAddMatchResultPage(MatchInformation matchInformation,Model model){
+    public String toAddMatchResultPage(MatchInformation matchInformation, Model model) {
         MatchInformation matchInformation1 = matchNewsService.selectMatchNewById(matchInformation.getId());
         Collection<Player> homeTeamPlayers = playerService.selectPlayerByTeam(matchInformation.getHomeTeam());
         Collection<Player> guestTeamPlayers = playerService.selectPlayerByTeam(matchInformation.getGuestTeam());
-        model.addAttribute("matchInformation1",matchInformation1);
-        model.addAttribute("homeTeamPlayers",homeTeamPlayers);
-        model.addAttribute("guestTeamPlayers",guestTeamPlayers);
+        model.addAttribute("matchInformation1", matchInformation1);
+        model.addAttribute("homeTeamPlayers", homeTeamPlayers);
+        model.addAttribute("guestTeamPlayers", guestTeamPlayers);
         return "match/addMatchResult";
     }
 
-    //添加比赛结果
+    /**
+     * 添加比赛结果
+     *
+     * @param matchResult
+     * @return
+     */
     @GetMapping("/addMatchResult")
-    public String addMatchResult(MatchResult matchResult){
-        String score = matchResult.getGuestGoals()+":"+matchResult.getHomeGoals();
+    public String addMatchResult(MatchResult matchResult) {
+        String score = matchResult.getGuestGoals() + ":" + matchResult.getHomeGoals();
         matchResult.setScore(score);
         matchNewsService.insertMatchResult(matchResult);
         String state = "已结束";
-        matchNewsService.updateStateById(state,matchResult.getMatchId());
+        matchNewsService.updateStateById(state, matchResult.getMatchId());
         return "redirect:matchResult";
     }
 
-    //给球员技术统计表添加数据
+    /**
+     * 给球员技术统计表添加数据
+     *
+     * @param playerSkill
+     * @param matchInformation
+     * @return
+     */
     @PostMapping("/insertPlayerSkill")
-    public String insertPlayerSkill(PlayerSkill playerSkill,MatchInformation matchInformation){
-        System.out.println("球员技术:"+playerSkill.getName()+playerSkill.getGoals());
+    public String insertPlayerSkill(PlayerSkill playerSkill, MatchInformation matchInformation) {
+        System.out.println("球员技术:" + playerSkill.getName() + playerSkill.getGoals());
         int number = playerService.queryPlayerByName(playerSkill.getName()).getNumber();
         playerSkill.setNumber(number);
         playerSkill.setResultId(matchInformation.getId());

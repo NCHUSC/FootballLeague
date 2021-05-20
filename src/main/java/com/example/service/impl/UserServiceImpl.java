@@ -19,34 +19,58 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
-    //保存用户
+    /**
+     * 保存用户
+     *
+     * @param user
+     * @return
+     */
     @Transactional
     @Override
     public User saveUser(User user) {
         return userRepository.save(user);
     }
 
-    //删除用户
+    /**
+     * 删除用户
+     *
+     * @param user_id
+     */
     @Transactional
     @Override
     public void deleteUser(int user_id) {
         userRepository.deleteById(user_id);
     }
 
-    //修改用户
+    /**
+     * 修改用户
+     *
+     * @param user
+     * @return
+     */
     @Transactional
     @Override
     public User modifyUser(User user) {
         return userRepository.save(user);
     }
 
-    //通过id获取用户
+    /**
+     * 通过 id 获取用户
+     *
+     * @param user_id
+     * @return
+     */
     @Override
     public User getUserById(int user_id) {
         return userRepository.getOne(user_id);
     }
 
-    //通过账号获取用户
+    /**
+     * 通过账号获取用户
+     *
+     * @param account
+     * @return
+     */
     @Override
     public User getUserByAccount(String account) {
         return userRepository.findByAccount(account);

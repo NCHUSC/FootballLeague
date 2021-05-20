@@ -12,22 +12,25 @@ import java.util.List;
 public interface MatchInformationMapper {
     /**
      * 插入比赛信息
+     *
      * @param matchInformation
      * @return
      */
-    @Options(useGeneratedKeys = true,keyProperty = "id")
+    @Options(useGeneratedKeys = true, keyProperty = "id")
     @Insert("insert into matchInformation (league,round,matchDate,homeTeam,guestTeam,referee,city,field,state) values (#{league},#{round},#{matchDate},#{homeTeam},#{guestTeam},#{referee},#{city},#{field},#{state})")
     int saveMatchInformation(MatchInformation matchInformation);
 
     /**
      * 查询所有的比赛信息
+     *
      * @return
      */
     @Select("select * from matchInformation")
     public List<MatchInformation> getAllMatchInformation();
 
     /**
-     * 根据id查询比赛信息
+     * 根据 id 查询比赛信息
+     *
      * @param id
      * @return
      */
@@ -36,6 +39,7 @@ public interface MatchInformationMapper {
 
     /**
      * 根据联赛查询比赛信息
+     *
      * @param league
      * @return
      */

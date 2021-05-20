@@ -8,10 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import org.thymeleaf.util.StringUtils;
 
-import javax.jws.WebParam;
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -25,11 +22,12 @@ public class UserController {
 
     /**
      * 从数据库中获取用户列表
+     *
      * @return
      */
-    private List<User> userList(){
-        List<User> users=new ArrayList<>();
-        for(User user:userRepository.findAll()){
+    private List<User> userList() {
+        List<User> users = new ArrayList<>();
+        for (User user : userRepository.findAll()) {
             users.add(user);
         }
         return users;
@@ -37,6 +35,7 @@ public class UserController {
 
     /**
      * 查询所用用户
+     *
      * @return
      */
     @GetMapping("/users")
@@ -45,24 +44,35 @@ public class UserController {
         return new ModelAndView("login.html", "userModel", model);
     }
 
-    //跳转至注册页面
+    /**
+     * 跳转至注册页面
+     *
+     * @param model
+     * @return
+     */
     @GetMapping("/register")
-    public ModelAndView toRegisterPage(Model model){
-        model.addAttribute("user",new User());
-        return new ModelAndView("register","userModel",model);
+    public ModelAndView toRegisterPage(Model model) {
+        model.addAttribute("user", new User());
+        return new ModelAndView("register", "userModel", model);
     }
 
-    //添加用户
+    /**
+     * 添加用户
+     *
+     * @param user1
+     * @param map
+     * @return
+     */
     @PostMapping("/register")
-    public String register(User user1,Map<String,Object> map){
-        String account=user1.getAccount();
+    public String register(User user1, Map<String, Object> map) {
+        String account = user1.getAccount();
         System.out.println(account);
 
-        //查询数据库中是否已存在相同的账号
-        for(User user:userRepository.findAll()){
-            if(account.equals(user.getAccount())){
+        // 查询数据库中是否已存在相同的账号
+        for (User user : userRepository.findAll()) {
+            if (account.equals(user.getAccount())) {
                 //用户名已存在
-                map.put("msg","用户名已存在");
+                map.put("msg", "用户名已存在");
                 System.out.println("用户名已存在");
                 return "register";
             }
@@ -71,9 +81,14 @@ public class UserController {
         return "login";
     }
 
-    //修改用户
+    /**
+     * 修改用户
+     *
+     * @param user
+     * @return
+     */
     @PostMapping("/modifyUser")
-    public String modifyUser(User user){
+    public String modifyUser(User user) {
         userRepository.save(user);
         return "login";
     }

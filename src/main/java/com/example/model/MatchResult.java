@@ -1,35 +1,58 @@
 package com.example.model;
 
+/**
+ * 比赛结果实体类
+ */
 public class MatchResult {
 
-    //比赛结果id
+    /**
+     * 比赛结果 id
+     */
     private Integer rid;
 
-    //所属联赛
+    /**
+     * 所属联赛
+     */
     private String rleague;
 
-    //比赛日期
+    /**
+     * 比赛日期
+     */
     private String rmatchDate;
 
-    //主队
+    /**
+     * 主队
+     */
     private String rhomeTeam;
 
-    //客队
+    /**
+     * 客队
+     */
     private String rguestTeam;
 
-    //比赛获胜方
+    /**
+     * 比赛获胜方
+     */
     private String winner;
 
-    //比分
+    /**
+     * 比分
+     */
     private String score;
 
-    //主队进球数
+    /**
+     * 主队进球数
+     */
     private Integer homeGoals;
 
-    //客队进球数
+    /**
+     * 客队进球数
+     */
     private Integer guestGoals;
 
-    //所属比赛
+    /**
+     * 所属比赛
+     */
     private Integer matchId;
 
     public Integer getMatchId() {

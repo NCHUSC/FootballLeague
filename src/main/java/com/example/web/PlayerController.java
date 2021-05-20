@@ -15,33 +15,51 @@ public class PlayerController {
     @Autowired
     PlayerService playerService;
 
-    //跳转至添加球员页面
+    /**
+     * 跳转至添加球员页面
+     *
+     * @param model
+     * @return
+     */
     @GetMapping("/player")
-    public String toAddPage(Model model){
+    public String toAddPage(Model model) {
         Collection<Team> teams = playerService.selectAllTeam();
-        model.addAttribute("teams",teams);
+        model.addAttribute("teams", teams);
         return "player/addPlayer";
     }
 
-    //跳转至查询球员页面
+    /**
+     * 跳转至查询球员页面
+     *
+     * @param model
+     * @return
+     */
     @GetMapping("/queryPlayer")
-    public String toQueryPage(Model model){
+    public String toQueryPage(Model model) {
         Collection<Team> teams = playerService.selectAllTeam();
-        model.addAttribute("teams",teams);
+        model.addAttribute("teams", teams);
         return "player/queryPlayer";
     }
 
 
-    //跳转至射手榜页面
+    /**
+     * 跳转至射手榜页面
+     *
+     * @return
+     */
     @GetMapping("/shooterboard")
-    public String toShooterPage(){
+    public String toShooterPage() {
         return "player/shooterboard";
     }
 
 
-    //点击退出跳转至登录界面
+    /**
+     * 点击退出跳转至登录界面
+     *
+     * @return
+     */
     @GetMapping("/logout")
-    public String toLogin(){
+    public String toLogin() {
         return "login";
     }
 }

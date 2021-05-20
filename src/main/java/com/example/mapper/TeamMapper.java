@@ -27,7 +27,7 @@ public interface TeamMapper {
     @Select("select * from team where league=#{league}")
     public List<Team> getTeamByLeague(String league);
 
-    @Options(useGeneratedKeys = true,keyProperty = "id")
+    @Options(useGeneratedKeys = true, keyProperty = "id")
     @Insert("insert into team (teamName,shorterName,captainName,captainTel,home,city,league) values (#{teamName},#{shorterName},#{captainName},#{captainTel},#{home},#{city},#{league})")
     public int save(Team team);
 
@@ -36,7 +36,6 @@ public interface TeamMapper {
 
     @Delete("delete from team where id=#{id}")
     public int deleteTeamById(Integer id);
-
 
     @Select("select distinct city from team")
     public List<String> selectTeamCity();

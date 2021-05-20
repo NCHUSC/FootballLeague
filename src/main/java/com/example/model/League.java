@@ -6,49 +6,78 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+/**
+ * 联赛实体类
+ */
 @Entity
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
 public class League {
 
-    //联赛id
+    /**
+     * 联赛 id
+     */
     @Id
     @GeneratedValue
     private int league_id;
 
-    //联赛名称
+    /**
+     * 联赛名称
+     */
     private String leagueName;
 
-    //联赛简称
+    /**
+     * 联赛简称
+     */
     private String shorterName;
 
-    //开始日期
+    /**
+     * 开始日期
+     */
     private String startDate;
 
-    //结束日期
+    /**
+     * 结束日期
+     */
     private String endDate;
 
-    //主办方
+    /**
+     * 主办方
+     */
     private String sponsor;
 
-    //联赛章程
+    /**
+     * 联赛章程
+     */
     private String constitution;
 
-    //赛事性质
+    /**
+     * 赛事性质
+     */
     private String level;
 
-    //赛事性别
+    /**
+     * 赛事性别
+     */
     private String gender;
 
-    //几人制联赛
+    /**
+     * 几人制联赛
+     */
     private int number;
 
-    //半场时间
+    /**
+     * 半场时间
+     */
     private String halfTime;
 
-    //中场休息时间
+    /**
+     * 中场休息时间
+     */
     private String halfRelaxTime;
 
-    //弃权默认比人
+    /**
+     * 弃权默认比人
+     */
     private String abstentionScore;
 
     public League() {

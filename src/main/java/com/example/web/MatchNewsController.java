@@ -15,7 +15,12 @@ public class MatchNewsController {
     @Autowired
     MatchNewsService matchNewsService;
 
-    //查询比赛信息
+    /**
+     * 查询比赛信息
+     * @param matchInformation
+     * @param model
+     * @return
+     */
     @PostMapping("/matchNews_select")
     public String selectMatchNewsByDate(MatchInformation matchInformation, Model model){
         Collection<MatchInformation> matchNews1 = null;

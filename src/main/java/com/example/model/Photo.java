@@ -6,37 +6,58 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+/**
+ * 比赛照片实体类
+ */
 @Entity
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
 public class Photo {
 
-    //照片id
+    /**
+     * 照片 id
+     */
     @Id
     @GeneratedValue
     private int photo_id;
 
-    //上传用户
+    /**
+     * 上传用户
+     */
     private String uploadUser;
 
-    //上传时间
+    /**
+     * 上传时间
+     */
     private String uploadDate;
 
-    //照片简介
+    /**
+     * 照片简介
+     */
     private String introduction;
 
-    //照片源文件位置
+    /**
+     * 照片源文件位置
+     */
     private String srcFile;
 
-    //照片保存文件位置
+    /**
+     * 照片保存文件位置
+     */
     private String destFile;
 
-    //保存后的完整文件名
+    /**
+     * 保存后的完整文件名
+     */
     private String fileName;
 
-    //所属联赛ID
+    /**
+     * 所属联赛 ID
+     */
     private int leagueID;
 
-    //图片保存的静态资源路径
+    /**
+     * 图片保存的静态资源路径
+     */
     private String staticPath;
 
     public int getPhoto_id() {

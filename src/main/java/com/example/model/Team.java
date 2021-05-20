@@ -1,29 +1,48 @@
 package com.example.model;
 
+/**
+ * 球队实体类
+ */
 public class Team {
 
-    //球队id
-    private int id ;
+    /**
+     * 球队 id
+     */
+    private int id;
 
-    //球队名称
+    /**
+     * 球队名称
+     */
     private String teamName;
 
-    //球队简称
+    /**
+     * 球队简称
+     */
     private String shorterName;
 
-    //队长姓名
+    /**
+     * 队长姓名
+     */
     private String captainName;
 
-    //队长联系方式
+    /**
+     * 队长联系方式
+     */
     private String captainTel;
 
-    //主场
+    /**
+     * 主场
+     */
     private String home;
 
-    //所在城市
+    /**
+     * 所在城市
+     */
     private String city;
 
-    //所参加联赛
+    /**
+     * 所参加联赛
+     */
     private String league;
 
     public int getId() {

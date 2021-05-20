@@ -5,7 +5,7 @@ import com.example.model.PlayerSkill;
 
 import java.util.Collection;
 
-public interface  MatchNewsService {
+public interface MatchNewsService {
 
     public Collection<MatchInformation> selectAllMatchNews();
 

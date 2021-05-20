@@ -28,24 +28,26 @@ public class TeamServiceImpl implements TeamService {
 
     @Override
     public List<Team> getTeam(Team team) {
-        System.out.println("传递给Service的对象："+team.toString());
+        System.out.println("传递给Service的对象：" + team.toString());
         //System.out.println(!team.getTeamName().isEmpty());
-        if(team.getId()!=0){
+        if (team.getId() != 0) {
             System.out.println("按id查询");
             return teamMapper.getTeamById(team.getId());
-        }else if(team.getTeamName()!=null){
+        } else if (team.getTeamName() != null) {
             System.out.println("按球队名称查询");
             return teamMapper.getTeamByTeamName(team.getTeamName());
-        }else if(team.getHome()!=null){
+        } else if (team.getHome() != null) {
             System.out.println("按主场查询");
             return teamMapper.getTeamByHome(team.getHome());
-        }else if(team.getCity()!=null){
+        } else if (team.getCity() != null) {
             System.out.println("按城市查询");
             return teamMapper.getTeamByCity(team.getCity());
-        }else if(team.getLeague()!=null){
+        } else if (team.getLeague() != null) {
             System.out.println("按联赛查询");
             return teamMapper.getTeamByLeague(team.getLeague());
-        }else return null;
+        } else {
+            return null;
+        }
     }
 
     @Override

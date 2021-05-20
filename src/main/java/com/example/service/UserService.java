@@ -8,6 +8,7 @@ public interface UserService {
 
     /**
      * 保存用户
+     *
      * @param user
      * @return
      */
@@ -15,12 +16,14 @@ public interface UserService {
 
     /**
      * 删除用户
+     *
      * @param user_id
      */
     void deleteUser(int user_id);
 
     /**
      * 修改用户
+     *
      * @param user
      * @return
      */
@@ -28,6 +31,7 @@ public interface UserService {
 
     /**
      * 通过id获取用户
+     *
      * @param user_id
      * @return
      */
@@ -35,6 +39,7 @@ public interface UserService {
 
     /**
      * 通过账号获取用户
+     *
      * @param account
      * @return
      */
@@ -42,6 +47,7 @@ public interface UserService {
 
     /**
      * 获取所有用户列表
+     *
      * @return
      */
     List<User> userList();

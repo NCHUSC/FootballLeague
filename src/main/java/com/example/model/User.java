@@ -6,28 +6,41 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+/**
+ * 用户实体类
+ */
 @Entity
-@JsonIgnoreProperties(value = {"hibernateLazyInitializer","handler"})
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
 public class User {
 
-    //用户id
+    /**
+     * 用户 id
+     */
     @Id
     @GeneratedValue
     private int user_id;
 
-    //账号（用户名）
+    /**
+     * 账号（用户名）
+     */
     private String account;
 
-    //密码
+    /**
+     * 密码
+     */
     private String password;
 
-    //用户昵称
+    /**
+     * 用户昵称
+     */
     private String nickname;
 
-    //用户联系方式（电话）
+    /**
+     * 用户联系方式（电话）
+     */
     private String tel;
 
-    public User(){
+    public User() {
 
     }
 

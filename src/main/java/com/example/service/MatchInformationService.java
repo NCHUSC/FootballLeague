@@ -7,20 +7,22 @@ import java.util.List;
 public interface MatchInformationService {
     /**
      * 添加比赛信息
+     *
      * @param matchInformation
      * @return
      */
-
     int saveMatchInformation(MatchInformation matchInformation);
 
     /**
      * 查询所有比赛信息
+     *
      * @return
      */
     List<MatchInformation> getAllMatchInformation();
 
     /**
-     * 根据id查询比赛信息
+     * 根据 id 查询比赛信息
+     *
      * @param id
      * @return
      */
@@ -28,6 +30,7 @@ public interface MatchInformationService {
 
     /**
      * 按联赛查询
+     *
      * @param league
      * @return
      */

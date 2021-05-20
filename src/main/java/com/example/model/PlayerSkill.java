@@ -1,20 +1,33 @@
 package com.example.model;
 
+/**
+ * 球员技能实体类
+ */
 public class PlayerSkill {
 
-    //球员id
+    /**
+     * 球员 id
+     */
     private Integer id;
 
-    //球员姓名
+    /**
+     * 球员姓名
+     */
     private String name;
 
-    //球衣号码
+    /**
+     * 球衣号码
+     */
     private Integer number;
 
-    //球员总进球数
+    /**
+     * 球员总进球数
+     */
     private Integer goals;
 
-    //球员数据id
+    /**
+     * 球员数据 id
+     */
     private Integer resultId;
 
     public Integer getResultId() {
